@@ -11,7 +11,7 @@ def obtain_key(name, length=256):
     """obtain the stored key with the specified name. Generate a new one if DNE"""
     key_location = "key_data/"+name
     if not os.path.isfile(key_location):
-        key = get_random_bytes(length/8)
+        key = get_random_bytes(length//8)
         keyfile = open(key_location, "wb")
         keyfile.write(key)
         keyfile.close()
