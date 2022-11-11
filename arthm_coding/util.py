@@ -25,6 +25,7 @@ def Rescale(D, w, a, b, c=-1, C=None):
     while(1):
         if w > 0 and double_floor_op(a, r*l, r*l-1) == double_floor_op(b, r*l, r*l-1):
             D[-w] = D[-w] + double_floor_op(a, r*l, r*l-1)
+            print("?? = "+str(double_floor_op(a, r*l, r*l-1)))
             for i in range(1,w):
                 D[-i] = int(not D[-i])
             w = 0;
@@ -46,6 +47,7 @@ def Rescale(D, w, a, b, c=-1, C=None):
                     c = c + C[len(D)+l]
                 else:
                     c = c+ dollar_sign(1 << r)
+                    print("haha")
                 w = w+1
         if b - a > cmp_val:
             break

@@ -28,11 +28,17 @@ def decode_basic(input_cipher_text, model_name=None):
     while(1):
         target_freq = (c-a)/(b-a) 
         token = model.GetToken(target_freq, model_name)
-        print(str(D)+" -> "+str(C))
         generated_sentence += " "+token
         a,b = util.Adjust(model_name, token, a, b)
         a,b,c,w = util.Rescale(D, w, a, b, c, C)
         #s = model.next_seed(#TODO
+        print(D)
+        print(C)
+        print(a)
+        print(b)
+        print(c)
+        print(w)
+        print("-------------------")
         if len(D) >= len(C):
             break
 
