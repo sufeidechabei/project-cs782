@@ -1,7 +1,7 @@
 """This is where we put the code for models used in arithmatic coding"""
 
 
-simple_token_set = ["I","cannot","hello","what","really","meat","secret","impossible"]
+simple_token_set = ["I","eat","hello","what","really","meat","secret","impossible"]
 probability_base = 200
 simple_token_frequency = [43,10,21,47,33,18,8,20]
 simple_token_frequency_dict = {}
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     print(simpleGetToken(0.567))
     print(simpleGetToken(0.987))
     print(simpleGetFreq("I"))
-    print(simpleGetFreq("cannot"))
+    print(simpleGetFreq("eat"))
     print(simpleGetFreq("hello"))
     print(simpleGetFreq("what"))
     print(simpleGetFreq("really"))
