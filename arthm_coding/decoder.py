@@ -3,9 +3,9 @@ import util as util
 import model as model
 
 
-def process_input_cipher_text(ct, mode=2)
-    if mode = 2
-        return int(ct, 2)
+def process_input_cipher_text(ct, mode=2):
+    if mode == 2:
+        return int("0b"+ct, 2)
     return 0
     
 
@@ -21,15 +21,27 @@ def decode_basic(input_cipher_text, model_name=None):
     generated_sentence = "" #The "T" in pseudocode. Should be the container for the token.
     D = [] # ??? TODO  Use list of chars for mutability
     C = [*input_cipher_text]
+    for i in range (0,len(C)):
+        C[i] = int(C[i])
     #s = model.get_first_seed() TODO
 
-    while(#TODO):
+    while(1):
         target_freq = (c-a)/(b-a) 
         token = model.GetToken(target_freq, model_name)
+        print(str(D)+" -> "+str(C))
         generated_sentence += " "+token
         a,b = util.Adjust(model_name, token, a, b)
-        w,a,b,c = util.Rescale(D, w, a, b, c, input_cipher_text)
+        a,b,c,w = util.Rescale(D, w, a, b, c, C)
         #s = model.next_seed(#TODO
+        if len(D) >= len(C):
+            break
 
     return generated_sentence
 
+
+
+
+if __name__ == "__main__":
+    test_ct = "11011110101011011011111011101111" #0xdeadbeef
+    out = decode_basic(test_ct)
+    print(out)
