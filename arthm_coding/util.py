@@ -1,11 +1,15 @@
 """Utils needed for arithmatic encoding and decoding"""
-import model as model
+try:
+    import arthm_coding.model as model
+except ModuleNotFoundError:
+    import model as model
 import random
 import math
 
 coding_parameters = {
         "symbol_length":1,
         "coding_length":32,
+        "precision2":32,
         }
 
 
@@ -30,7 +34,9 @@ def Rescale(D, w, a, b, c=-1, C=None):
             #print("?? = "+str(double_floor_op(a, r*l, r*l-1)))
             print("w="+str(w))
             for i in range(1,w):
+                print(bin(D[-i]), end="+")
                 D[-i] = int(not D[-i])
+                print(bin(D[-i]))
             w = 0;
             a = a ^ xor_val
             b = b ^ xor_val

@@ -1,6 +1,10 @@
 """Arithmatic Decoding functions"""
-import util as util
-import model as model
+try:
+    import arthm_coding.util as util
+    import arthm_coding.model as model
+except ModuleNotFoundError as e:
+    import util as util
+    import model as model
 
 
 def process_input_cipher_text(ct, mode=2):
@@ -44,10 +48,92 @@ def decode_basic(input_cipher_text, model_name=None):
 
     return generated_sentence
 
+def decode_ytb(ct_str, model_name = None):
+    """Following youtube decoder"""
+    ct = [*ct_str]
+    M = len(ct)
+    preci = util.coding_parameters["precision2"]
+    whole = 1 << preci
+    half = whole / 2
+    quarter = whole / 4
+    EMIT = []
+    a = 0
+    b = 1 << preci
+    z = 0
+    i = 1
+    DL = 0
+    s = 0
+    while (i <= preci and i <= M):
+        if ct[i-1] == '1':
+            z = z + (1 << (preci - i))
+        i = i + 1
+    #Now Z is an integer of the ct.
+    #print("input cipher text in numeber (z): "+str(z))
+    while (1):
+        """ Approach 1 : GetToken"""
+        target_freq = (z-a) / (b-a)
+        token = model.GetToken(target_freq, model_name)
+        EMIT.append(token)
+        #print("curr  emit : "+" ".join(EMIT))
+        a,b = util.Adjust(model_name, token,a, b)
+        """ End of approach 1 """
+        while (b < half) or (a > half):
+            if b < half:
+                a = 2 * a
+                b = 2 * b
+                z = 2 * z
+                DL = DL + s + 1
+                s = 0
+            elif a > half:
+                a = 2 * (a - half)
+                b = 2 * (b - half)
+                z = 2 * (z - half)
+                DL = DL + s + 1
+                s = 0
+            """ Update approximation?? """
+            if i <= M and ct[i-1] == '1':
+                z = z + 1
+            i = i + 1
+            """ Middle type rescaling """
+        while a > quarter and b < 3 * quarter:
+            s = s + 1
+            a = 2 * (a - quarter)
+            b = 2 * (b - quarter)
+            z = 2 * (z - quarter)
+            if i <= M and ct[i-1] == '1':
+                z = z + 1
+            i = i + 1
+        #print(DL)
+        #print(M)
+        if DL+s+1 >= M:
+            """ It's a hack """
+            break
+    #print("----------------")
+    #print("Final emit : "+" ".join(EMIT))
+    return EMIT
 
+
+
+    
+
+def decode(ct_str, model_name = None):
+    """interface"""
+    #print("######################################################")
+    return decode_ytb(ct_str, model_name = None)
 
 
 if __name__ == "__main__":
     test_ct = "11011110101011011011111011101111" #0xdeadbeef
-    out = decode_basic(test_ct)
-    print(out)
+    test_ct_2 = "00100011100111"
+    test_ct_2_1 = test_ct_2 +"010010"
+    test_ct_3 = "001000110110001111101110001100001"
+    test_ct_3_1 = test_ct_3 +"10111011101"
+
+    decode(test_ct_2)
+    decode(test_ct_2_1)
+    decode(test_ct_3)
+    decode(test_ct_3_1)
+    #decode(test_ct)
+
+    #out = decode_basic(test_ct)
+    #print(out)
