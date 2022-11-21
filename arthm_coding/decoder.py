@@ -129,8 +129,8 @@ def decode_ytb(ct_str, model_name = None):
             else:
                 print("Lasted "+str(t-tt)+" seconds")
             break
-        else:
-            print("a="+str(a)+" b="+str(b)+" z="+str(z))
+        #else:
+            #print("a="+bin(int(a))+"\tb="+bin(int(b))+"\tz="+bin(int(z))+"\t"+str(emission))
         #if z == half:
             #break_sign = True
         #print(DL)
