@@ -2,10 +2,11 @@
 try:
     import arthm_coding.util as util
     import arthm_coding.model as model
+    import arthm_coding.encoder as encoder
 except ModuleNotFoundError as e:
     import util as util
     import model as model
-
+    import encoder as encoder
 
 def process_input_cipher_text(ct, mode=2):
     if mode == 2:
@@ -74,7 +75,11 @@ def decode_ytb(ct_str, model_name = None):
         target_freq = (z-a) / (b-a)
         token = model.GetToken(target_freq, model_name)
         EMIT.append(token)
-        #print("curr  emit : "+" ".join(EMIT))
+        #RE = encoder.encode_ytb(EMIT, model_name)
+        #print("curr emit : "+" ".join(EMIT))
+        #print("reencode length = "+str(len(RE)))
+        #if len(RE) >= M:
+        #    break
         a,b = util.Adjust(model_name, token,a, b)
         """ End of approach 1 """
         while (b < half) or (a > half):
@@ -103,11 +108,10 @@ def decode_ytb(ct_str, model_name = None):
             if i <= M and ct[i-1] == '1':
                 z = z + 1
             i = i + 1
+        if DL >= M:
+            break
         #print(DL)
         #print(M)
-        if DL+s+1 >= M:
-            """ It's a hack """
-            break
     #print("----------------")
     #print("Final emit : "+" ".join(EMIT))
     return EMIT
@@ -119,7 +123,7 @@ def decode_ytb(ct_str, model_name = None):
 def decode(ct_str, model_name = None):
     """interface"""
     #print("######################################################")
-    return decode_ytb(ct_str, model_name = None)
+    return decode_ytb(ct_str, model_name)
 
 
 if __name__ == "__main__":
@@ -129,10 +133,10 @@ if __name__ == "__main__":
     test_ct_3 = "001000110110001111101110001100001"
     test_ct_3_1 = test_ct_3 +"10111011101"
 
-    decode(test_ct_2)
-    decode(test_ct_2_1)
-    decode(test_ct_3)
-    decode(test_ct_3_1)
+    decode(test_ct_2, "complx")
+    #decode(test_ct_2_1)
+    decode(test_ct_3, "complx")
+    #decode(test_ct_3_1)
     #decode(test_ct)
 
     #out = decode_basic(test_ct)

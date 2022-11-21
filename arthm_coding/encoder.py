@@ -19,17 +19,20 @@ def encode_basic(list_tokens, model_name=None):
     #s = model.get_first_seed()
    
     bb = b
-    print(str(a/bb)+","+str(b/bb))
+    #print(str(a/bb)+","+str(b/bb))
     for token in list_tokens:
         a, b = util.Adjust(model_name, token, a, b)
-        print(str(a/bb)+","+str(b/bb))
+        #print(str(a/bb)+","+str(b/bb))
         a, b, _, w = util.Rescale(D, w, a, b)
         #s = model.next_seed(#TODO
-        print(token+":", end="")
-        for n in D:
-            print(bin(n)[2:], end=" ")
-        print()
-    return D, w
+        #print(token+":", end="")
+        #for n in D:
+            #print(bin(n)[2:], end=" ")
+        #print()
+    DD = []
+    for d in D:
+        DD.append(bin(d)[2:])
+    return DD #, w
 
 
 def encode_ytb(list_tokens, model_name = None):
@@ -82,7 +85,7 @@ def encode_ytb(list_tokens, model_name = None):
 
 def encode(list_tokens, model_name = None):
     """interface"""
-    return encode_ytb(list_tokens, model_name)
+    return encode_basic(list_tokens, model_name)
 
 
 if __name__ == "__main__":
@@ -93,8 +96,15 @@ if __name__ == "__main__":
     #for n in D:
     #    print(bin(n)[2:], end=" ")
     #print(w)
-    encode(tlist)
+    #r1 = encode(tlist)
+    #print("First  emit : "+"".join(r1))
+    #print()
+    #r2 = encode(tlist2)
+    #print("Second emit : "+"".join(r2))
+    #print("================")
+    r1 = encode_ytb(tlist)
+    print("First  emit : "+"".join(r1))
     print()
-    encode(tlist2)
-
+    r2 = encode_ytb(tlist2)
+    print("Second emit : "+"".join(r2))
 
