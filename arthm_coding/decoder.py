@@ -66,6 +66,8 @@ def decode_ytb(ct_str, model_name = None):
     i = 1
     DL = 0
     s = 0
+    token = None
+    break_sign = False
     while (i <= preci and i <= M):
         if ct[i-1] == '1':
             z = z + (1 << (preci - i))
@@ -75,25 +77,23 @@ def decode_ytb(ct_str, model_name = None):
     #Now Z is an integer of the ct.
     #print("input cipher text in numeber (z): "+str(z))
     while (1):
-        """ Approach 1 : GetToken"""
-        target_freq = (z-a) / (b-a)
-        token = model.GetToken(target_freq, model_name)
-        EMIT.append(token)
-        #RE = encoder.encode_ytb(EMIT, model_name)
-        #print("curr emit : "+" ".join(EMIT))
-        #print("reencode length = "+str(len(RE)))
-        #if len(RE) >= M:
-        #    break
-        a,b = util.Adjust(model_name, token,a, b)
+        """ Approach 2 : Stick with YouTube"""
+        emission = model.EmitToken(a,b,z,"complx")
+        if emission is not None:
+            token = emission[0]
+            a = emission[1]
+            b = emission[2]
+            EMIT.append(token)
+        #print("emitted"+str(token))
         """ End of approach 1 """
-        while (b <= half) or (a >= half):
-            if b <= half:
+        while (b < half) or (a > half):
+            if b < half:
                 a = 2 * a
                 b = 2 * b
                 z = 2 * z
                 DL = DL + s + 1
                 s = 0
-            elif a >= half:
+            elif a > half:
                 a = 2 * (a - half)
                 b = 2 * (b - half)
                 z = 2 * (z - half)
@@ -112,19 +112,27 @@ def decode_ytb(ct_str, model_name = None):
             if i <= M and ct[i-1] == '1':
                 z = z + 1
             i = i + 1
-        if DL >= M:
-            break
+        #if DL >= M:
+        #    break
         t = time.perf_counter()
-        if t - tt > 5:
+        if t - tt > 3 or DL >= M or break_sign:
             print(len(EMIT))
             print("DL="+str(DL))
             print("M="+str(M))
             print("s="+str(s))
             print("a="+str(a))
             print("b="+str(b))
+            print("z="+str(z))
             print("half="+str(half))
-            EMIT=[]
+            if (t - tt) > 3:
+                print("Operation lasted longer than 3 seconds. Abort!!!")
+            else:
+                print("Lasted "+str(t-tt)+" seconds")
             break
+        else:
+            print("a="+str(a)+" b="+str(b)+" z="+str(z))
+        #if z == half:
+            #break_sign = True
         #print(DL)
         #print(M)
     #print("----------------")

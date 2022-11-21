@@ -9,8 +9,9 @@ import math
 coding_parameters = {
         "symbol_length":1,
         "coding_length":32,
-        "precision2":128,
+        "precision2":32,
         }
+
 
 
 def Adjust(model_name, token, a, b):

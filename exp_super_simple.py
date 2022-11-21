@@ -28,7 +28,7 @@ def run_exp(secret_msg):
     print("Turning the CT into English:")
     print("---------------------------------------------")
     eng = decoder.decode_ytb(ct_bin, "complx")
-    print("#"+" ".join(eng))
+    #print("#"+" ".join(eng))
     
     
     print()
@@ -53,7 +53,7 @@ def run_exp(secret_msg):
 
 
 run_exp("UW - Madison")
-run_exp("AF may lack fresh water!")
+#run_exp("AF may lack fresh water!")
 #run_exp("Ba Yue Qiu Gao Feng Nu Hao, Juan Wo Wu Shang San Chong Mao.")
     #print()
     #print("breaking into chunks")

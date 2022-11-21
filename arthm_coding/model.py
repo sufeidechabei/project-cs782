@@ -1,5 +1,5 @@
 """This is where we put the code for models used in arithmatic coding"""
-
+import math
 
 simple_token_set = ["I","eat","hello","what","really","meat","secret","impossible"]
 probability_base = 200
@@ -27,20 +27,37 @@ def generate_complx_cumu_frequency():
     for i in range(0,len(complx_token_set)):
         token = complx_token_set[i]
         current_cumu += complx_token_frequency[i]
-        complx_token_cumu_frequency_dict[token] = current_cumu
-        complx_token_frequency_dict[token] = complx_token_frequency[i]
-        complx_token_cumu_frequency_list.append((token, current_cumu))
+        complx_token_cumu_frequency_dict[token] = current_cumu/complx_token_freq_sum
+        complx_token_frequency_dict[token] = complx_token_frequency[i]/complx_token_freq_sum
+        complx_token_cumu_frequency_list.append((token,
+            current_cumu/complx_token_freq_sum,
+            complx_token_frequency[i]/complx_token_freq_sum 
+            ))
+
+
+def complxEmitToken(a, b, z):
+    for token_info in complx_token_cumu_frequency_list:
+        token = token_info[0]
+        cumu = token_info[1]
+        relative = token_info[2]
+        diff = b - a
+        a0 = a + math.floor((cumu-relative)*diff)
+        b0 = a + math.floor(cumu*diff)
+        if a0 <= z and z < b0:
+            return (token, a0, b0)
+    return None
+
 
 
 def complxGetToken(freq):
     for token_info in complx_token_cumu_frequency_list:
-        if token_info[1]/complx_token_freq_sum >= freq:
+        if token_info[1] >= freq:
             return token_info[0]
 
 def complxGetFreq(token):
     cumu = complx_token_cumu_frequency_dict[token]
     relative = complx_token_frequency_dict[token]
-    return (cumu/complx_token_freq_sum, relative/complx_token_freq_sum)
+    return (cumu, relative)
 
 def generate_simple_cumu_frequency():
     if len(simple_token_cumu_frequency_dict) !=  0:
@@ -81,10 +98,18 @@ def GetFreq(token, model=None):
         generate_simple_cumu_frequency()
         return simpleGetFreq(token)
     if model == "complx":
-        generate_simple_cumu_frequency()
+        generate_complx_cumu_frequency()
         return complxGetFreq(token)
     return None
 
+
+def EmitToken(a,b,z,model=None):
+    if model is None:
+        return None
+    if model == "complx":
+        generate_complx_cumu_frequency()
+        return complxEmitToken(a,b,z)
+    return None
 
 if __name__ == '__main__':
     generate_simple_cumu_frequency()
