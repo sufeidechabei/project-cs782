@@ -47,15 +47,15 @@ def encode_ytb(list_tokens, model_name = None):
     s = 0
     for token in list_tokens:
         a, b = util.Adjust(model_name, token, a, b) #we can still use the Adjust function
-        while b < half or a > half:
-            if b < half:
+        while b <= half or a >= half:
+            if b <= half:
                 EMIT.append('0')
                 for i in range(0,s):
                     EMIT.append('1')
                 s = 0
                 a = 2 * a
                 b = 2 * b
-            elif a > half:
+            elif a >= half:
                 EMIT.append('1')
                 for i in range(0,s):
                     EMIT.append('0')

@@ -8,6 +8,8 @@ except ModuleNotFoundError as e:
     import model as model
     import encoder as encoder
 
+import time
+
 def process_input_cipher_text(ct, mode=2):
     if mode == 2:
         return int("0b"+ct, 2)
@@ -68,6 +70,8 @@ def decode_ytb(ct_str, model_name = None):
         if ct[i-1] == '1':
             z = z + (1 << (preci - i))
         i = i + 1
+
+    tt = time.perf_counter()
     #Now Z is an integer of the ct.
     #print("input cipher text in numeber (z): "+str(z))
     while (1):
@@ -82,14 +86,14 @@ def decode_ytb(ct_str, model_name = None):
         #    break
         a,b = util.Adjust(model_name, token,a, b)
         """ End of approach 1 """
-        while (b < half) or (a > half):
-            if b < half:
+        while (b <= half) or (a >= half):
+            if b <= half:
                 a = 2 * a
                 b = 2 * b
                 z = 2 * z
                 DL = DL + s + 1
                 s = 0
-            elif a > half:
+            elif a >= half:
                 a = 2 * (a - half)
                 b = 2 * (b - half)
                 z = 2 * (z - half)
@@ -109,6 +113,17 @@ def decode_ytb(ct_str, model_name = None):
                 z = z + 1
             i = i + 1
         if DL >= M:
+            break
+        t = time.perf_counter()
+        if t - tt > 5:
+            print(len(EMIT))
+            print("DL="+str(DL))
+            print("M="+str(M))
+            print("s="+str(s))
+            print("a="+str(a))
+            print("b="+str(b))
+            print("half="+str(half))
+            EMIT=[]
             break
         #print(DL)
         #print(M)

@@ -40,13 +40,13 @@ def run_exp(secret_msg):
     
     
     print("---------- translate CT to hex ---------------")
-    hex_encoded_ct = hex(int(encoded_ct,2))
+    hex_encoded_ct = hex(int(encoded_ct,2)).zfill(len(ct.hex()))
     print(hex_encoded_ct)
     
     
     print()
     print()
-    new_ct = bytes.fromhex(hex_encoded_ct[2:])
+    new_ct = (bytes.fromhex(hex_encoded_ct[2:].zfill(len(ct.hex()))))
     new_msg = crypto.decrypt_aes_cbc(key, iv, new_ct)
     
     print("Decrypted message = "+new_msg)
