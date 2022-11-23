@@ -62,6 +62,7 @@ def decode_ytb(ct_str, model_name = None):
     EMIT = []
     a = 0
     b = 1 << preci
+    bb = b
     z = 0
     i = 1
     DL = 0
@@ -74,6 +75,7 @@ def decode_ytb(ct_str, model_name = None):
         i = i + 1
 
     tt = time.perf_counter()
+    print_counter = 0
     #Now Z is an integer of the ct.
     #print("input cipher text in numeber (z): "+str(z))
     while (1):
@@ -129,8 +131,17 @@ def decode_ytb(ct_str, model_name = None):
             else:
                 print("Lasted "+str(t-tt)+" seconds")
             break
-        #else:
-            #print("a="+bin(int(a))+"\tb="+bin(int(b))+"\tz="+bin(int(z))+"\t"+str(emission))
+        else:
+            if not z == half or print_counter < 10:
+                RE = encoder.encode_ytb(EMIT, "complx")
+                reencode = "".join(RE)
+                print(reencode)
+                print("a="+str(a/bb)+"\tb="+str(b/bb)+"\tz="+str(z/bb))
+        if z == half:
+            print_counter += 1
+            RE2 = encoder.encode_ytb(EMIT, "complx")
+            if len(RE2) >= M:
+                break
         #if z == half:
             #break_sign = True
         #print(DL)

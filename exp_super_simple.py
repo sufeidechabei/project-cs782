@@ -28,7 +28,7 @@ def run_exp(secret_msg):
     print("Turning the CT into English:")
     print("---------------------------------------------")
     eng = decoder.decode_ytb(ct_bin, "complx")
-    #print("#"+" ".join(eng))
+    print("#"+" ".join(eng))
     
     
     print()
@@ -36,13 +36,23 @@ def run_exp(secret_msg):
     
     
     encoded_ct = "".join(encoder.encode_ytb(eng, "complx"))[:binary_ct_len]
-    print(encoded_ct)
+    print("encoded  "+encoded_ct)
+    print("original "+ct_bin)
     
+
+    print()
+    print("DO some XOR")
+    old_value = int(ct_bin, 2)
+    new_value = int(encoded_ct, 2)
+    xored = old_value ^ new_value
+    xored_str = str((bin(xored)[2:])).zfill(binary_ct_len)
+    print("xored    "+xored_str)
+
     
     print("---------- translate CT to hex ---------------")
     hex_encoded_ct = hex(int(encoded_ct,2)).zfill(len(ct.hex()))
     print(hex_encoded_ct)
-    
+   
     
     print()
     print()

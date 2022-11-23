@@ -35,6 +35,90 @@ def encode_basic(list_tokens, model_name=None):
     return DD #, w
 
 
+def bin32(x):
+    return bin(x)[2:].zfill(32)
+
+def bin8(x):
+    l = util.coding_parameters["symbol_length"]
+    return bin(x)[2:].zfill(l)
+
+def print_D(str, D):
+    print(str+" D =", end="")
+    for s in D:
+        print(" "+bin8(s), end="")
+    print()
+
+def print_D2(str, D):
+    print(str+" D =", end="")
+    for s in D:
+        print(""+bin8(s), end="")
+    print()
+
+def encode_paper_retry(list_tokens, model_name = None):
+    """ Retry implementing the encoer """
+    r = util.coding_parameters["symbol_length"]
+    l = util.coding_parameters["coding_length"]
+    w = 0
+    a = 0
+    b = 1 << (r*l)
+    D = []
+    print("a = "+bin32(a)+" b = "+bin32(b))
+    for token in list_tokens:
+        print()
+        print()
+        print("Processing token '"+token+"' ================================================================")
+        a,b = util.Adjust(model_name, token, a, b)
+        while(1):
+            print("a = "+bin32(a)+" b = "+bin32(b) + " are the lower and upper bound at the beginning of this loop")
+            adf = util.double_floor_op(a, r*l, r*l-1)
+            bdf = util.double_floor_op(b, r*l, r*l-1)
+            if w > 0 and adf == bdf:
+                print("we are doing the first IF with w = "+str(w)+" adf = bdf = "+bin32(adf))
+                print_D("    before, we have", D)
+                D[-w] = D[-w] + adf
+                for i in (1, w):
+                    D[-i] = not D[-i]
+                print_D("    after,  we have", D)
+                w = 0
+                xor_val = 1 << (r*l-1)
+                a = a ^ xor_val
+                b = b ^ xor_val
+                print("    and now a = "+bin32(a)+" b = "+bin32(b))
+            cmp_val = 1 << (r*(l-1))
+            if b - a < cmp_val:
+                print("b-a = "+bin32(b-a)+" < "+bin32(cmp_val)+" entering second IF")
+                A = util.double_floor_op(a, r*l, r*(l-1))
+                print("    Adding A = "+bin8(A)+" to D")
+                D.append(A)
+                print_D("    now we have", D)
+                a = util.double_ceil_op(a, r*l, r)
+                b = util.double_ceil_op(b, r*l, r)
+                dfb2 = util.double_floor_op(b, r*l, r*(l-1))
+                print("    changed to a = "+bin32(a)+" b = "+bin32(b)+" and we have dfb2 = "+bin8(dfb2))
+                if A != dfb2:
+                    print("        A is not the same as dfb2, entering the inner IF")
+                    xor_val = 1 << (r*l-1)
+                    a = a ^ xor_val
+                    b = b ^ xor_val
+                    w = w + 1
+                    print("        changed to a = "+bin32(a)+" b = "+bin32(b)+" and increment w to "+str(w))
+            if (b - a > cmp_val):
+                print("b-a = "+bin32(b-a)+" > "+bin32(cmp_val)+" existing loop....")
+                break
+            #input()
+    return D,w
+                
+def test_retry():
+    tlist = ["I","really","eat","meat"]
+    D,w = encode_paper_retry(tlist)
+    print("\n$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\nFinal Result:")
+    print_D2("", D)
+    print("w = "+str(w))
+
+
+
+
+
 def encode_ytb(list_tokens, model_name = None):
     """Following ytb's algorithm"""
     preci = util.coding_parameters["precision2"]
@@ -89,22 +173,23 @@ def encode(list_tokens, model_name = None):
 
 
 if __name__ == "__main__":
+    test_retry()
     tlist = ["I","really","eat","meat"]
-    tlist2 = ["I","really","eat","hello","what","I","eat","impossible","secret","meat"]
-    #D,w = encode_basic(tlist)
+    #tlist2 = ["I","really","eat","hello","what","I","eat","impossible","secret","meat"]
+    #D = encode_ytb(tlist)
     #print("finally")
     #for n in D:
     #    print(bin(n)[2:], end=" ")
     #print(w)
-    #r1 = encode(tlist)
-    #print("First  emit : "+"".join(r1))
+    r1 = encode_ytb(tlist)
+    print("First  emit : "+"".join(r1))
     #print()
     #r2 = encode(tlist2)
     #print("Second emit : "+"".join(r2))
     #print("================")
-    r1 = encode_ytb(tlist)
-    print("First  emit : "+"".join(r1))
-    print()
-    r2 = encode_ytb(tlist2)
-    print("Second emit : "+"".join(r2))
+    #r1 = encode_ytb(tlist)
+    #print("First  emit : "+"".join(r1))
+    #print()
+    #r2 = encode_ytb(tlist2)
+    #print("Second emit : "+"".join(r2))
 
