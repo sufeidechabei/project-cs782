@@ -121,7 +121,7 @@ def GetToken(freq, model=None):
 rotation = 1
 english_token_set = {}
 english_token_set[1] = ["James", "Robert", "John", "Michael", "David", "William", "Richard", "Joseph", "Thomas", "Charles", "Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Karen"]
-english_token_set[2] = ["is", "has", "does", "gets", "makes", "knows", "takes", "sees", "wants", "gives", "uses", "finds", "feels", "eats", "kicks", "touches"]
+english_token_set[2] = ["is", "has", "checks", "gets", "makes", "knows", "takes", "sees", "wants", "gives", "uses", "finds", "feels", "eats", "kicks", "touches"]
 english_token_set[3] = ["door", "keys", "eys", "headphones", "house", "spoon", "clothes", "pencil", "hairband", "glasses", "candle", "watch", "blanket", "toothpaste", "baseball", "burger", "chocolate"]
 english_token_set[4] = ["when", "where", "if", "since", "although", "and", "or", "but"]
 
