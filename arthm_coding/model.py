@@ -44,7 +44,7 @@ def complxEmitToken(a, b, z):
         a0 = a + math.floor((cumu-relative)*diff)
         b0 = a + math.floor(cumu*diff)
         if a0 <= z and z < b0:
-            return (token, a0, b0)
+            return (token, a0, b0, True)
     return None
 
 
@@ -93,6 +93,123 @@ def GetToken(freq, model=None):
        
     return None
 
+
+#######################################################
+# TRY TO INCOPORATE OPEN AI
+#######################################################
+#import os
+#import openai
+#with open("SENSITIVE.txt","r") as r:
+#    api_key = r.read()
+#
+#openai.api_key = api_key.rstrip()
+#top_p = 0.1
+#engine = "text-davinci-001"
+#prompt = "The"
+#max_tokens = 1
+#logprobs = 5
+#temperature = 0
+#bias = {19990:-100,198:-100, 628:-100}
+#
+#response = openai.Completion.create(engine = engine, prompt = prompt, max_tokens = max_tokens, logprobs = logprobs, temperature=temperature, logit_bias =  bias)
+#print(response)
+
+
+##############################################################################################
+# A more speaking friendly model
+#############################################################################################
+rotation = 1
+english_token_set = {}
+english_token_set[1] = ["James", "Robert", "John", "Michael", "David", "William", "Richard", "Joseph", "Thomas", "Charles", "Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Karen"]
+english_token_set[2] = ["is", "has", "does", "gets", "makes", "knows", "takes", "sees", "wants", "gives", "uses", "finds", "feels", "eats", "kicks", "touches"]
+english_token_set[3] = ["door", "keys", "eys", "headphones", "house", "spoon", "clothes", "pencil", "hairband", "glasses", "candle", "watch", "blanket", "toothpaste", "baseball", "burger", "chocolate"]
+english_token_set[4] = ["when", "where", "if", "since", "although", "and", "or", "but"]
+
+english_freq_set = {}
+english_freq_set[1] = [23, 26, 33, 6, 19, 31, 48, 1, 5, 16, 18, 31, 36, 23, 12, 49, 20, 4, 43, 3]
+english_freq_set[2] = [24, 6, 46, 37, 9, 33, 19, 9, 49, 1, 39, 14, 39, 34, 33, 27]
+english_freq_set[3] = [12, 19, 44, 1, 46, 32, 39, 11, 15, 33, 21, 34, 45, 50, 30, 8, 12]
+english_freq_set[4] = [33, 6, 28, 37, 3, 33, 5, 30]
+
+english_freq_sum = {}
+english_freq_sum[1] = 447
+english_freq_sum[2] = 419
+english_freq_sum[3] = 452
+english_freq_sum[4] = 175
+
+english_info_dict = {}
+class rotation:
+    r = 1
+
+def reset():
+    rotation.r = 1
+
+def generate_english_cumu_frequency():
+    a = rotation()
+    if len(english_info_dict) !=  0:
+        return
+    for pos in range(1,5):
+        english_info_dict[pos] = {}
+        current_cumu = 0
+        for i in range(0,len(english_token_set[pos])):
+            #print(pos)
+            #print(len(english_token_set[pos]))
+            #print(len(english_freq_set[pos]))
+            token = english_token_set[pos][i]
+            current_cumu += english_freq_set[pos][i]
+            cumu_freq = current_cumu / english_freq_sum[pos]
+            rela_freq = english_freq_set[pos][i]/english_freq_sum[pos]
+            english_info_dict[pos][token] = (cumu_freq, rela_freq)
+
+
+def englishEmitToken(a,b,z):
+    for token in english_info_dict[rotation.r]:
+        cumu = english_info_dict[rotation.r][token][0]
+        rela = english_info_dict[rotation.r][token][1]
+        diff = b - a
+        a0 = a + math.floor((cumu-rela) * diff)
+        b0 = a + math.floor(cumu * diff)
+        breakable = False
+        if rotation.r == 3:
+            breakable = True
+        if a0 <= z and z < b0:
+            if rotation.r != 4:
+                rotation.r = rotation.r + 1
+            else:
+                rotation.r = 1
+            return (token, a0, b0, breakable)
+    return None
+
+
+def englishGetToken(freq):
+    for token in english_info_dict[rotation,r]:
+        if english_info_dict[rotation.r][token][0] > freq:
+            if rotation.r != 4:
+                rotation.r = rotatin.r + 1
+            else:
+                rotation.r = 1
+            return token
+
+def englishGetFreq(token):
+    for pos in range(1, 5):
+        if token in english_info_dict[pos]:
+            cumu = english_info_dict[pos][token][0]
+            rela = english_info_dict[pos][token][1]
+            return (cumu, rela)
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 def GetFreq(token, model=None):
     if model is None:
         generate_simple_cumu_frequency()
@@ -100,6 +217,9 @@ def GetFreq(token, model=None):
     if model == "complx":
         generate_complx_cumu_frequency()
         return complxGetFreq(token)
+    if model == "english":
+        generate_english_cumu_frequency()
+        return englishGetFreq(token)
     return None
 
 
@@ -109,22 +229,25 @@ def EmitToken(a,b,z,model=None):
     if model == "complx":
         generate_complx_cumu_frequency()
         return complxEmitToken(a,b,z)
+    if model == "english":
+        generate_english_cumu_frequency()
+        return englishEmitToken(a,b,z)
     return None
 
-if __name__ == '__main__':
-    generate_simple_cumu_frequency()
-    print(simple_token_cumu_frequency_dict)
-    print("----")
-    print(simple_token_cumu_frequency_list)
-    print(simpleGetToken(0.456))
-    print(simpleGetToken(0.876))
-    print(simpleGetToken(0.234))
-    print(simpleGetToken(0.123))
-    print(simpleGetToken(0.567))
-    print(simpleGetToken(0.987))
-    print(simpleGetFreq("I"))
-    print(simpleGetFreq("eat"))
-    print(simpleGetFreq("hello"))
-    print(simpleGetFreq("what"))
-    print(simpleGetFreq("really"))
-    print(simpleGetFreq("meat"))
+#if __name__ == '__main__' and False:
+#    generate_simple_cumu_frequency()
+#    print(simple_token_cumu_frequency_dict)
+#    print("----")
+#    print(simple_token_cumu_frequency_list)
+#    print(simpleGetToken(0.456))
+#    print(simpleGetToken(0.876))
+#    print(simpleGetToken(0.234))
+#    print(simpleGetToken(0.123))
+#    print(simpleGetToken(0.567))
+#    print(simpleGetToken(0.987))
+#    print(simpleGetFreq("I"))
+#    print(simpleGetFreq("eat"))
+#    print(simpleGetFreq("hello"))
+#    print(simpleGetFreq("what"))
+#    print(simpleGetFreq("really"))
+#    print(simpleGetFreq("meat"))

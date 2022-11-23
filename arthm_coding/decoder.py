@@ -83,15 +83,18 @@ def decode_ytb(ct_str, model_name = None):
 
     tt = time.perf_counter()
     print_counter = 0
+    okay_to_break = False
     #Now Z is an integer of the ct.
     #print("input cipher text in numeber (z): "+str(z))
+    model.reset()
     while (1):
         """ Approach 2 : Stick with YouTube"""
-        emission = model.EmitToken(a,b,z,"complx")
+        emission = model.EmitToken(a,b,z,model_name)
         if emission is not None:
             token = emission[0]
             a = emission[1]
             b = emission[2]
+            okay_to_break = emission[3]
             EMIT.append(token)
         #print("emitted"+str(token))
         """ End of approach 1 """
@@ -124,7 +127,7 @@ def decode_ytb(ct_str, model_name = None):
         #if DL >= M:
         #    break
         t = time.perf_counter()
-        if t - tt > 3 or DL >= M or break_sign:
+        if t - tt > 3 or (DL >= M and okay_to_break):
             dprint(len(EMIT))
             dprint("DL="+str(DL))
             dprint("M="+str(M))
@@ -140,14 +143,15 @@ def decode_ytb(ct_str, model_name = None):
             break
         else:
             if not z == half or print_counter < 10:
-                RE = encoder.encode_ytb(EMIT, "complx")
-                reencode = "".join(RE)
-                dprint("         "+reencode)
+                #RE = encoder.encode_ytb(EMIT, "complx")
+                #reencode = "".join(RE)
+                #dprint("         "+reencode)
                 dprint("a="+str(a/bb)+"\tb="+str(b/bb)+"\tz="+str(z/bb))
         if z == half:
             print_counter += 1
-            RE2 = encoder.encode_ytb(EMIT, "complx")
-            if len(RE2) >= M:
+            #RE2 = encoder.encode_ytb(EMIT, "complx")
+            #if len(RE2) >= M and okay_to_break:
+            if okay_to_break:
                 break
         #if z == half:
             #break_sign = True
