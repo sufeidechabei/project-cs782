@@ -1,0 +1,57 @@
+Failure cases due to decryption/padding error
+5767d4cb9279242a307aa546bafd3bc7  --->  5767d4cb9279242a307aa546bafd3bc6
+8f91c017dba8268bb37cfc7d600a69b3  --->  8f91c017dba8268bb37cfc7d600a69b2
+e5692cb75f4f4c73a9f65031d68b90b7  --->  e5692cb75f4f4c73a9f65031d7f9177b
+44e41a90c4b1385b138f9b80a83c488f  --->  44e41a90c4b1385b138f9b80a83c488e
+4e3ba40c63d239ad530997a62eb7c907  --->  4e3ba40c63d239ad530997a62eb7c906
+27a3ee1765275844697012f283a1f794  --->  27a3ee1765275844697012f283a1f793
+d6bd000a67c9376093875ad07e1ce499  --->  d6bd000a67c9376093875af16d56e53c
+1e28da4bbb4a8525d1a0ed52293688d4  --->  1e28da4bbb4a8525d1a0ed52293688d3
+b31b049df36f27df1dcd66a693848b1b  --->  b31b049df36f27df1dcd66a693848b1a
+71c2a2d6bc55e7639f126e1e9377afc5  --->  71c2a2d6bc55e7639f126e1e9377afc4
+81d509091dc44444326e3cc047e616aa  --->  81d509091dc44444326e3cc047e616a9
+1dfe6709e06aa164c2c2ca56bb2cd9f7  --->  1dfe6709e06aa164c2c2ca56bb2cedbe
+a2bffe45b4327fa47bee9de915a7c06d  --->  a2bffe45b4327fa47bee9de915a7c06c
+75d687e6f6d0406158e53a158bba582e  --->  75d687e6f6d0406158e53a158bba582d
+7653a5cf09feda0a67f585b893e3d264  --->  7653a5cf09feda0a67f585b893e3d263
+17137f79aed94893f6f707e82aa78d0e  --->  17d50e5edd98a65f7b77bddf9c0ad8ac
+10be15ecd75c198e6d7f1978f46cd48d  --->  10be15ecd75c198e6d7f1978f46cd48c
+7a34d5dd1755802192adb8074dab508c  --->  7a34d5dd1755802192adb8074dab508b
+f1ad76bafab422f40a108dc17c188ef7  --->  f1ad76bafab422f40a108dc17c188ef6
+fa366f06dea706d8a0b64f6fd897754c  --->  fa366f06dea706d8a0b64f6fd897754b
+a7eda0e90d2437bb0a971d4bcb7b4f07  --->  a7eda0e90d2437bb0a971d4bcb7b4f06
+68f26abff6fdfc9f47145a19ecac260b  --->  68f26abff6fdfc9f47145a19ecac260a
+63a8c0c6c56163cf7b19df20c9e9b8ad  --->  63a8c0c6c56163cf7b19df20c9e9b8ac
+30e36eb5765701ced4d6a7bca8e4b28a  --->  30e36eb5765701ced4d6a7bca8e4b289
+5d80c972ffea275fa0e9db5ad867001f  --->  5d80c972ffea275fa0e9db5ad867001e
+c40d4d77cc2e3f6463e9b598cb5124b5  --->  c40d4d77cc2e3f6463e9b598cb5124b4
+f777531489ed3a4af13109847f919b0b  --->  f777531489ed3a4af13109847f919b0a
+c52bb5927e9e20e66eb45b743f5b35d9  --->  c52bb5927e9e20e66eb45b743f5b35d8
+739f36c0fcf4c91a82f3b9e5ac9d0eee  --->  739f36c0fcf4c91a82f3b9e5ac9d0eed
+ad0386a3541b3fb4c524c57a08b80ecf  --->  ad0386a3541b3fb4c524c57a08b80ece
+a5b7f631dc1e5aac8b3b30f6d2505ad8  --->  a5ba7be3f23d2b52dfc97a28fd5dd9f7
+f050fb27112ee97009fd9281b145000a  --->  f050fb27112ee97009fd9281b1450009
+5522dd12cf5b42f17b1af88142fd2936  --->  5522dd12cf5b42f17b1af88142fd2935
+ae45b30f1c622527704a99f32dc18c06  --->  ae45b30f1c622527704a99f32dc18c05
+7d809b055bbd7c24844f804f64225770  --->  7d809b055bbd7c24844f804f6422576f
+5ccc402a4b7b66155a3fab8df6a8247d  --->  5ccc402a4b7b66155a3fab8df6a8247c
+
+
+Failure cases due to wrong message produced
+
+
+Succeeded ones
+45971ef4a908e553273448525fdfadff = lookotherIlastlookthereseemsmallthingandandbutfacttimethisthisablelooklooktimewill
+f442a66ce4033164b1f9b8721c11c600 = willonaboutseemlastplacepublicoftimechildlookallpublicchildyearablesmallwomanwayfrom
+9ac597187436ebf95e608d46ff7ffd6b = publicItosmallberightthetheyouotheroverbutyoungcompanyandintoandseemthisshe
+e73dfd8a10deed8d20fc731f9af1e4ab = herpersontimeandgivefinddoseemmyhefirstgivechildoftryfindlargeuseseegreat
+abc10492f1add9426ffe3c69b0b1bc38 = onusebeknowsmallpublicablelargesmallfeelbeworktimetellatdifferentofworkowngiveof
+8f2499d0e4b98cb2ff7641e09baae513 = earlyfeelthereknowthatfacttimetotrybehermyorworkoldmakeimportantthateyewith
+0fca27519364ef5791348d821cad7369 = handlargefeelyounghebyoldanewlastaskableIwayplacethatthinkmakesee
+8d66a591635fbd998a96f3cba14b0ea0 = nextnextpartyoupointfindpointhelargeshehandownuselastpublicwaytelllastinto
+cf64a32842f5798d80078dec1d60a24e = thatlastsheasgiveandtellowneyeintobeeyeseemupusesmallpartbutdonext
+5e9b8ac74a1a82b5ca5cc9cfbc2d649a = feelintofromitbadmyseemeyeovertakeyounglongknowoverplacegovernmentforpointwill
+3eeb80bc658e4192e598b53c55d2d5ac = knowIlargepublicwitheyesmallableonwantlargeapointbutdifferenteyeinlookallother
+7caf65fe41cc88ada51ddcdfb89e547c = othersheearlywithsmalltherehisonethereknowworkyouallthisgivemanwayintoableof
+4587bd171d99f2d1498b6e2501af6643 = lookownononeableyougetdifferentbeotherfeelyearseemaftersmalltimeaboutdoseemnext
+f0183a0eee2baf95e9ee89c2cef013bc = orfromoraanbutherlargeafterthinkuseforfeelweekwiththeretosmallwomanbut

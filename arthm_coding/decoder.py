@@ -51,6 +51,13 @@ def decode_basic(input_cipher_text, model_name=None):
 
     return generated_sentence
 
+debug_decoder = False
+
+def dprint(s):
+    if debug_decoder:
+        print(s)
+    
+
 def decode_ytb(ct_str, model_name = None):
     """Following youtube decoder"""
     ct = [*ct_str]
@@ -118,25 +125,25 @@ def decode_ytb(ct_str, model_name = None):
         #    break
         t = time.perf_counter()
         if t - tt > 3 or DL >= M or break_sign:
-            print(len(EMIT))
-            print("DL="+str(DL))
-            print("M="+str(M))
-            print("s="+str(s))
-            print("a="+str(a))
-            print("b="+str(b))
-            print("z="+str(z))
-            print("half="+str(half))
+            dprint(len(EMIT))
+            dprint("DL="+str(DL))
+            dprint("M="+str(M))
+            dprint("s="+str(s))
+            dprint("a="+str(a))
+            dprint("b="+str(b))
+            dprint("z="+str(z))
+            dprint("half="+str(half))
             if (t - tt) > 3:
-                print("Operation lasted longer than 3 seconds. Abort!!!")
+                dprint("Operation lasted longer than 3 seconds. Abort!!!")
             else:
-                print("Lasted "+str(t-tt)+" seconds")
+                dprint("Lasted "+str(t-tt)+" seconds")
             break
         else:
             if not z == half or print_counter < 10:
                 RE = encoder.encode_ytb(EMIT, "complx")
                 reencode = "".join(RE)
-                print(reencode)
-                print("a="+str(a/bb)+"\tb="+str(b/bb)+"\tz="+str(z/bb))
+                dprint("         "+reencode)
+                dprint("a="+str(a/bb)+"\tb="+str(b/bb)+"\tz="+str(z/bb))
         if z == half:
             print_counter += 1
             RE2 = encoder.encode_ytb(EMIT, "complx")

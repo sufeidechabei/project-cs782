@@ -76,7 +76,7 @@ def encode_paper_retry(list_tokens, model_name = None):
                 print("we are doing the first IF with w = "+str(w)+" adf = bdf = "+bin32(adf))
                 print_D("    before, we have", D)
                 D[-w] = D[-w] + adf
-                for i in (1, w):
+                for i in range(1, w):
                     D[-i] = not D[-i]
                 print_D("    after,  we have", D)
                 w = 0

@@ -1,0 +1,57 @@
+Failure cases due to decryption/padding error
+c084384f2d87fe1f26bc6adf61aa151c  --->  c084384f2f18ac85596ee678a061da11
+56c73c4750db107d650b5cefb3d7aadf  --->  56c73c4751fbaa2b37956993f26ad4ec
+a70f24a559d3fbb24e3c1c67f437fade  --->  a70f24a559d3fbb24e3c1c67f437fdc8
+f629d460b6204a2910bcdc19253d0ff5  --->  f629d460b6204a2910bcdc19253d0ff4
+1e3cdcd9bbafe263900278da382f30f4  --->  1e3ceb7144963e8f0796c87db97bedc1
+9073187d16646c0daf992385f9f1edb2  --->  9073187d16646c0daf992385f9f1edb1
+fa83ea946b8e72c8ae1eb019f4f1949c  --->  fa83ea946b8e72c8ae6b30cac5187c34
+491eb88286c8e24ffbaf2b8775f48b41  --->  491eb88286c8e24ffbaf2b8775f48b40
+e8ab3e26743a00ea421aa12452ad1b7e  --->  e8ab3e26743a00ea421aa12452ad1b7d
+54a29e1a4cac3b65b2774bbf3f55c1e0  --->  54a29e1a4cac3b65b2774bbf3f55c1df
+3f114ca49ab60609c1554131771e89ec  --->  3f114ca49ab60609c1554131771e89eb
+1ef7dfd7dff41e798b1086da328eeec7  --->  1ef7dfd7dff41e798b1086da328eeec6
+5821718ff7e24de4d61f2cb025d69167  --->  5821718ff7e24de4d61f2cb02c2ad19b
+d0686a69eff5edc868358e51c7ef7068  --->  d0686a69eff5edc868358e51c7ef7067
+57cbe70f4693f8e5399975762d032205  --->  57cbe70f4693f8e5399975762d032204
+dc47d293e19d721044539aadcc3c43c1  --->  dc47d293e19d721044539aadcc3c43c0
+b7254e7b92206884ec4e09b11d40b2c3  --->  b7254e7b92206884ec4e09b11d40b2c2
+3232eda95d8f6c147ed689b8688be792  --->  3232eda95d8f6c147ed689b8688be791
+9d7b536f3b744d075a27141405431062  --->  9d7b536f3b744d075a27141405431061
+6a72d63d3995db67039bf958d731bdf5  --->  6a72d63d3995db6703a1c234a0896215
+3b63e5db4b23fc08d463b54e6b6fd4dc  --->  3b649621dfd1e0ad86cfef9b6206cd61
+15e4b2b15da5fd016557107391a3c6ab  --->  15e4b2b15da5fd016557107391a3c6aa
+b6915bd0d35b7b6f0819a571f20ab126  --->  b6915bd0d35b7b6f0819a571f20ab125
+6b673d0eac03a9c84dc591d5b528bc42  --->  6b673d0eac03a9c84dc591d5b57438a6
+6b2f837484257dd442314037a1331cd6  --->  6b2f837484257dd442314037a1331cd5
+69dea8247b54b7d445f7481112dfa62e  --->  69dea8247b54b7d445f7481112dfa62d
+1925443b0d9d1dee82d31b59919a77eb  --->  1925443b0d9d1dee82d31b59919a77ea
+67bc5f56bea744db484e6c6e67bcbe8c  --->  67bc5f56bea744db484e6c6e67bcbe8b
+d2569c8a5d1f9f7d0fdcb4186fe4138a  --->  d2569cc77a05050ae557fb4f1dcb3f4d
+ec86a073c3b389a18557bab7a5cb4155  --->  ec86a073c3b389a18557bab7a5cb4169
+0f38cd644d754e0ef830fd7bfd2c24fb  --->  f38cd644d754e0ef833dd594aea3b18
+2149c475ce23556965ca464e6fcb0b9a  --->  560ac84345d62e69d150192f5a2e1c2f
+aea9ba83a57ae9777aa1bddc9072efba  --->  aea9ba83a57ae9777aa1bddc9072efb9
+5646e9850b69adaead44ba7745a34b22  --->  5646e9850b69adaead44ba7745aeb194
+3c80677d4d46d133d07146ee0565f8da  --->  3c80677d4d46d133d07146ee0565f8d9
+c8775668f0f4de1956ec072d2bef0539  --->  c8775668f0f4de1956ec072d2bef0538
+
+
+Failure cases due to wrong message produced
+
+
+Succeeded ones
+9d6808b831fd1b53e21b30b758e2be4f = baditworkonpersonupcallcasetimeworkoverwillnewwillItheyonoverchild
+241215d88fd81e28e74de69fbca59280 = weekintoofangoodshechildfeelnewyouusefeelableablegovernmentseemoryearbythis
+495e9f1a8bc19f6ea9e7bc20e8e4b30e = givepointwithyearherwayfeeltryplaceearlyatimeawaymypublicworkthisfirstgroupyoung
+fa3cd53901474cd12e0cf2a84f9a94a4 = allproblembethattheremyfactmyyoungbutdowantsmallbywillowndoorinask
+7b094bb140a29ff5cfdb39f8657b59f9 = otherearlythistrygroupyouleaveagiveherintolookdifferenthisdifferentofchildownlastfact
+02614f6cc89eeb2c472cf6fcb53f5afe = timesmallworkfromgovernmentIthatandthisdolooktheyworldgetheaboutbeweeksay
+45559b32bf2558915422b84120210548 = looknewuseleavesmallableyougoodmanwithwouldeyeyouchildgoodotherIandbutto
+8fb5d0581b3a0204af9fd276db67230f = earlydifferenthistellablewillherdopointbybutforlargecallfirstintohisaskuse
+90e66f29c7d09c34d770dc3653f69417 = earlythatoronbegreatgovernmentotherthatimportantgiveatbutsmallthispointdoofcompanytaketime
+880b38573fd1e6a3cbbe2433c4045608 = smallthatandfeelearlyoffirstcallthinksaynewwithcompanybewaygoodgreatbadtheir
+b13474135628df0c6cb6a95637358d3e = withfromfromchildgetnotworldgroupworkplacefromIearlyoldearlyableIfindwouldand
+9fcfd64d9813c5821f389d54024da754 = ableaskablelastthatoldowntherecompanyearlywomanorlookanorwouldIplacecall
+17bde28af7ee2fd6e211b9cd28f0eef8 = eyefindanshepersontellintolifeownmyfromlastearlydifferentweekonbytheirsmall
+e04c766ca783ef8865f2ae16e8d740db = thisbadalltheableandgiveanwantuppointcasedifferentmanimportantleaveintothinktry

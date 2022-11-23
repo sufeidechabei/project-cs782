@@ -1,0 +1,57 @@
+Failure cases due to decryption/padding error
+0f9334a36dfbb7164b9e85f2aa94bdc4  --->  f9334a36dfbb7164b9e85f2aa94bdc3
+46539732ef6fb95dca571db14556a9f0  --->  46539732ef6fb95dca571db14556a9ef
+e0732f7f3d525bb095322b5842b45ed1  --->  e0732f7f3d525bb095322b5842b45ed0
+741ace94cf129bd3849e56dc5d333af1  --->  741ace94cf129bd489f7c3ac8247dda9
+891cca5c6db8e5cbd7e4b07c4eb1c612  --->  891cca5c6db8e5cbd7e8f8afe8d1068a
+cab46121cc976b066c3b4b0dd03032f2  --->  cab46121cc976b066c3b4b0dd03032f1
+7cf974a66c09b579a94addb804c1722e  --->  7cf974a66c09b579a94addb804c1722d
+393c803e09bbdd2f6617cb1de88bd6d5  --->  393c803e09bbdd2f6617cb1de88bd6d4
+1fd785de064b42b67ed5996df7e3fb74  --->  542976e425851411b6db6b82cfe6473d
+9f0a16c8b98adc824222a72015cd7a37  --->  9f0a16c8b98adc824222a72015cd7a36
+2a05ab1a1087a18a9cfe6b33951c2709  --->  2a05ab1a1087a18a9cfe6b339522c8d6
+3a9a673ca858690a0abd5b3daf235041  --->  3a9a673ca858690a0abd5b5037db83f2
+474bf632ccef705541d046b63cc60165  --->  474bf632ccef95515fa85aef1ebbd119
+8a2c7a7f1e613005bffd80dbc18431ca  --->  8a2c7a7f1e67298067828d48cfdf34bb
+8477317a0bc62320f1e9879bf8a14831  --->  8477317a0bc62320f1e9879bf8a14830
+8fa12ceb6ef366e232e499ea6cce7505  --->  8fa12ceb6ef366e232e499ea6cce7504
+a2d6eca2e40353b9faf65fc21235f8ce  --->  a2d6eca2e40353b9faf65fc21235f8cd
+107ff4a16def626b52544958b89089cd  --->  107ff4a16def626b52544958b89089cc
+365ef3fef299611141e86c6efb6df93c  --->  365ef3fef299611141e86c6efb6df93b
+63355f71d7e91c4575cd3f531a44fa44  --->  63355f71d7e91c4575cd3f531a44fa43
+1f55dcca0aa99c4123aa28a24a97d246  --->  1f55dcca0aa99c4123aa28a24a97d245
+537445fd12ee602ffa3d7ebbf5ffb026  --->  5374c1ab101a8a4235a7a8473b8b0311
+76150d12d00fb2ff3a5259d9b3847fb7  --->  76150d12d00fb2ff3a5259d9b3847fb6
+8d50eb209b9cd696360c0c003fe08b18  --->  8d50eb209b9cd696360c0c003fe08b17
+6bbc9453344a466a4777ec70ed7cad2f  --->  6bbc9453344a466a4777ec70ed7cad2e
+3437673e9ca2bbae3d85f8788cc01ec5  --->  3437673e9ca2bbae3d85f8788cc01ec4
+3e2e91f6290747ec59d708fa1d949dcd  --->  3e2e91f6290747ec59d708fed3293115
+803f2e4b6b168d866ef24129fa38329e  --->  803f2e4b6b168d8c10ee6bcd5a1a46f6
+120ebb47a432f63f496fcd0175c78f9b  --->  120ebb47a432f63f496fcd0175c78f9a
+6481ef2e76f017c007e712c878d9aa5e  --->  6481ef2e76f017c007e977f1b4c8a92e
+67ad8a9233e18acd05ebd868f4cf06af  --->  67ad8a9233e18acd05ebd868f4cf06c5
+caf20e4b8812a225ef84f985b54d6c4f  --->  caf20e4b8812a225ef84f985b54d6c4e
+65f028729b5290a9d68ddfbf40d6d971  --->  65f028729b5290a9d68ddfbf40d6d970
+158d920c8415716872911467db31e75e  --->  158d920c8415716872911467db31e75d
+dccacd050b110a230fd74069283ac7b1  --->  dccacd050b110a230fd74069283ac7b0
+
+
+Failure cases due to wrong message produced
+
+
+Succeeded ones
+5bce3b9c9d87b28a6f2bef4d79648d6c = feelgroupknowfindpersonorearlyeyenewweekbeableitworktimeacompanyyoungshegood
+e3f0a8fc033231156318eb48f32732f6 = butpublicearlygoodearlylargeworkpointpartoftakeweekbeablethereachildtimeotherfirstmy
+17f12c9c59d4c6e9d839da44e628faf5 = eyefeelwithtimelastcompanybeotheroflasttimesayorhisotherpartlargetrygreatbe
+a02e5ac070de6140769c2b97004cb072 = ablefirstalltherechildnewfeellargeyoungfirsttoIwithhereyepublicagetmyotherlast
+899cc78c9dc06cc58e9a247a5292cdec = largebeandyoungbadeyeproblemseeandcaselargehighgoodgoodfactherimportantwantthere
+47be6bb90b74da5859c66c37ec1c8635 = wantworkpubliclargelastownpartfirstthingablebeIgreatpointyouworkheearlyworklookown
+41e5d8289a1f3a1cdb338fd99df4a581 = comewithcompanytimegetseemsheableshefeeltellaskearlybyofyouwaytheyuse
+f89e3e17fb3797d7bd36e33b90b6cb80 = mysheownhisplacethattakeotherovertheyableontimeworkbeforamyallgood
+5a33e1df789b39c25c7f6abf5833a32d = seemonmythatwillableintothinkfirstyouimportanttherelifetellthisthecasepublicworkyou
+5b29597953b0e864ea101b98b0d33330 = feeldayIchildchildpublicofpointfeelfromgroupcallafterearlydifferenttryafterablefirstsee
+687ac12fc3d8a707f147efbee390e5df = newovertimeanpointbyothergetafindworkshegoodbutpublicthinkknowanwantand
+51d6280675ea672419ca699c558e18fa = tellotheroverheandotherworkablegovernmentfeeloldmyafterheroldpubliceyethatearlyyoungto
+1613ff858d6f8b392069ba7418800e27 = childitownpointoldpublicusechildtimeandtellabadthisfeelwomantelldoearlyintoone
+c325cfeb99937e6965f8cd85ebbc3f75 = afterusepublicfeelsheweekfromallIlookbadtakeIIforoldeyewantlongthat
+0cc8352c9974039272f51bc09b8632ab = manapointgroupafterproblembegovernmentfeelbedifferentyoungafterthissmallpersonheroverthisbut

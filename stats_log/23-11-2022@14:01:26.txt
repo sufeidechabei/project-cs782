@@ -1,0 +1,57 @@
+Failure cases due to decryption/padding error
+0d328ac3b76632ae3b36b121a1f4a6a9  --->  d328ac3b76632ae3b36b121a1f4a6a8
+245056adf157a8103870e0b8d0232d95  --->  245056adf157a8103870e0b8d0232d94
+fd9fcb7b1efc925a5a0a501c802288c9  --->  fd9fcb7b1efc925a5a0a501c802288c8
+cf93dc4fe8b138ec86b8c99b0ea117d8  --->  cf93dc4fe8b138ec86b8c99b0ea12187
+346095d51fdaf011daef278e30efd26e  --->  346095d51fdbd24eb5fe593001fc6fc2
+3ad39305191260c441ad06068a064b6b  --->  3ad39305191260c441ad06068a064b6a
+68f773d7cac83f8f6e919220dd41ac72  --->  68f773d7cac83f8f6e919220dd41ac71
+3857f5e938ce11775d43e8d33802fdef  --->  3857f5e9890fe7410494641249771ed1
+3046129a05cbe007b1d640ae9e3ace3c  --->  3046129a05cbe007b1d640ae9e3ace3b
+b89745092bf74593e1f2aa7037b3844d  --->  b89745092bf74593e1f2aa7037b68687
+5ca06f66c68d6af42d6b565c6dd1fd19  --->  5ca06f66c68d6af42d6b565c6dd1fd18
+d1fa8c14756cba4dcdc854a6f9ea7c14  --->  d1fa8c14756cba4dcdc854a6f9ea7c13
+096d18ea881975fec545e365102f4af1  --->  96d18ea881975fec545e365102f4af0
+a6ecf6e698ee0ded30f158450265a15c  --->  a6ecf6e698ee0ded30f158450265a15b
+ee6eef1265558adc829bc972de022d18  --->  ee709e90732e1a8819a0e1f524c2fbdf
+9b6da439f427fbea179bea25fc089dfd  --->  9b6da439f427fbea179bea25fc089dfc
+14a6e35ccc4cc019126a07a9f7883ed2  --->  14a6e35ccc4cc019126a07a9f7883ed1
+831768cbb3aeec25c3a3672d8e6f2daa  --->  831768cbb3aeec25c3a3672d8e6f2da9
+3ba26cc654d723fede7490c4facc2b19  --->  3ba26cc654d723fede7490c4fc8bf14c
+1a71138630e617dbbf470374d69133dc  --->  1a71138630e617dbbf470374d69133db
+07384b0bb8632cafdc6899b87556f2cc  --->  7384b0bb8632cafdc6899b87556f2cb
+6e556124ccc94c8040f30b268e8a7e97  --->  6e556124ccc94c8040f30b268e8a7e96
+8dcbbcf44f70e9396d68f4cb2a567ffc  --->  8dcbbcf44f70e93e06261bb59b8d5755
+cebf88519e53950fb4bb41ee1a7cb680  --->  cebf88519e53950fb4bb41ee1a7cb67f
+6b48cc8db0f289645795dd1846ece17c  --->  6b48cc8db0f289645795dd1846ece17b
+4b6ccb59309815f383baa0034c7f7cba  --->  4b6ccb59309815f383baa0034c7f7cb9
+c5194913dc43465f94a27c6cbbaf81a0  --->  c5194913dc43465f94a2b23e89d076c0
+cfc6eb35b5742e516707f33222e98f42  --->  cfc6eb35b5742e516707f33222e98f41
+98cf8e6628396c0db677e4dd5cc930ac  --->  98cf8e6628396c0db677e4dd5cc930ab
+60a081239adfeed54247ae7ece5fe5d5  --->  60a081239adfeed54247ae7ece5fe5d4
+8f878c19e1eac98442bb0a13a7db7b92  --->  8f878c19e1eac98442bb0a13a7db7b91
+84aeae7b5c291fdf32e3ff4f1363b740  --->  84aeae7b5c291fdf32e3ff4f1363b73f
+2cfc30a2690e925bd9be99dfd5b02ad9  --->  2cfc30a2690e925bd9be99dfd5b02ad8
+06bcb8012ae1e2be4b47bb719c45f2b7  --->  6bcb81482ef471835b1e9cfaf90fa59
+7d7ff20e53f41bc5b871d72af4c0aee1  --->  7d7ff20e53f41bc5b871d72af4c0aee0
+09636ecff326da961ddd8a994692cee9  --->  9636ecff326da961ddd8a9969e23f13
+
+
+Failure cases due to wrong message produced
+
+
+Succeeded ones
+d6c20649535428654e4916805381b586 = itgivetheintoworkpersontolongpublicbadmyatellchildtheysaybeothereyethere
+5afaa05e6b37d11e6a3db38d13d678a8 = feeltimebethatwantdoearlytimeaandsmalloldwouldsmallsmallimportantsmallchildearlylooksay
+13575c9d806ac6c528947c3d659e5c87 = parttheretimetheywilltryherwomanpublicandablegreatdifferentworkabletheirbadallbadpoint
+cb8bc5dd9b27352f42fc8f336eac6593 = agoodthinkworkamypublicthatdoshetimeonoldlongsheknowitthatpersonearly
+d22d1a8a6373bd2d797db678265f1184 = Ipartdodoownearlyseemhertimeintofromtheredohandablefeelpubliclargehismyby
+03c2b776f6534f8bea3f6a1358afec84 = timeIdifferentgroupyoungherearlycomeagreathavegovernmentthisdifferentthisaskownownyoufirst
+df6cc1df058229b4b5f9791845cc478e = thisnewrightpublicwithyouthingoflastadifferentlastafterpartwithgetworkdaychild
+7ef608140ba0a616688b5471f9da49b3 = oldonfirstongovernmentgoodgiveayouyoudotheyusepartthingworkablebutsheold
+0f5a53067761d295abb039a9a86a6840 = lifehercomewithtryhedifferenttogiveanbadfromfeelaboutsmallthatupyearyoung
+6eb40c684b1117e58f112d7453ddbad1 = lastnewandoverandabletellfromsmallfindtakeleaveyearoneorgreatotheroldlastdifferent
+37b6871f5eab3b65ca6349150a40c552 = doearlyonlookthinglongearlyfromlastittellherpointonebyofwantbyfirstlarge
+12ba8ba66eb6c7329e1027108d24d630 = partthatpersonworkableintoworkIlookwaymytobethinkimportanteyeIyoungyoungknow
+9346cd28881d45ee9af332869d1285a6 = youngfirstthisfindIpublicgreatwomanyouotherlastgoodworktheythingworkpublicplaceItime
+038eb876423164046106cd8e7b02effc = timeandpublicfromwillleavedogroupallbadchildearlygivethiswomanotheronorwomanmake
