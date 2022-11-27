@@ -1,0 +1,24 @@
+
+Ran 1 times to successuflly encrypt 'UW - Madison'
+----------------------------------------------------------------------------------------------
+OUTPUT = Sarah eats blanket since John touches baseball and Linda gets toothpaste if Barbara feels eyes since James finds blanket since Jessica uses toothpaste since Robert gets watch when William uses hairband since Barbara knows eyes if Sarah uses house since
+
+
+
+Ran 1 times to successuflly encrypt 'AF may lack fresh water!'
+----------------------------------------------------------------------------------------------
+OUTPUT = Richard gets baseball if John checks blanket if Linda knows spoon since John gets glasses and Robert gets eyes since Sarah feels spoon when John is pencil when David eats candle when James knows baseball since Elizabeth has blanket since James has clothes and Robert kicks candle if Sarah kicks house or Sarah wants door but Barbara finds eyes when Sarah gets spoon if Sarah gets toothpaste and Sarah sees eyes but Patricia kicks
+
+
+
+Ran 1 times to successuflly encrypt 'Ba Yue Qiu Gao Feng Nu Hao, Juan Wo Wu Shang San Chong Mao.'
+----------------------------------------------------------------------------------------------
+OUTPUT = William kicks blanket and David touches candle if Mary uses eyes since Jennifer checks eyes when Patricia checks clothes if Michael uses watch and Sarah wants blanket if William checks house since James gets blanket when Richard feels blanket if Barbara finds house and Charles wants chocolate and Sarah wants eyes since Richard wants toothpaste and John is door and Linda knows hairband but Thomas makes eyes but Jennifer knows eyes when Robert wants eyes since Sarah wants keys since Barbara uses pencil and Jennifer is blanket since John makes chocolate and Robert feels toothpaste since Sarah wants hairband if Sarah uses house when Barbara uses candle but James knows clothes and Richard uses baseball and Barbara knows baseball but Mary knows eyes since Elizabeth feels toothpaste when Barbara touches burger since Patricia makes eyes but Elizabeth kicks blanket but William makes hairband when Barbara takes eyes since Sarah
+
+
+
+Ran 1 times to successuflly encrypt '..__.._.._..._..___..._.._...__.__..'
+----------------------------------------------------------------------------------------------
+OUTPUT = James wants glasses although Susan takes eyes and Richard wants toothpaste when Richard wants eyes but John takes blanket when Susan wants watch although John has door and Jennifer wants blanket but Robert wants hairband when John uses candle if Elizabeth eats eyes since John knows candle if Richard knows clothes if Robert touches watch but Barbara knows eyes when Robert feels toothpaste when Charles eats watch if Linda is spoon and Richard is house but Barbara kicks baseball if Jennifer gets toothpaste when Sarah eats eyes when Robert feels clothes since Linda feels eyes when David feels blanket and Elizabeth checks candle when Patricia knows toothpaste since Robert knows pencil
+
+

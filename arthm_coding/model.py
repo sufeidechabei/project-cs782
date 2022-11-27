@@ -122,7 +122,7 @@ rotation = 1
 english_token_set = {}
 english_token_set[1] = ["James", "Robert", "John", "Michael", "David", "William", "Richard", "Joseph", "Thomas", "Charles", "Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Karen"]
 english_token_set[2] = ["is", "has", "checks", "gets", "makes", "knows", "takes", "sees", "wants", "gives", "uses", "finds", "feels", "eats", "kicks", "touches"]
-english_token_set[3] = ["door", "keys", "eys", "headphones", "house", "spoon", "clothes", "pencil", "hairband", "glasses", "candle", "watch", "blanket", "toothpaste", "baseball", "burger", "chocolate"]
+english_token_set[3] = ["door", "keys", "eyes", "headphones", "house", "spoon", "clothes", "pencil", "hairband", "glasses", "candle", "watch", "blanket", "toothpaste", "baseball", "burger", "chocolate"]
 english_token_set[4] = ["when", "where", "if", "since", "although", "and", "or", "but"]
 
 english_freq_set = {}
@@ -156,6 +156,7 @@ def generate_english_cumu_frequency():
             #print(len(english_token_set[pos]))
             #print(len(english_freq_set[pos]))
             token = english_token_set[pos][i]
+            #current_cumu += english_freq_set[pos][i]
             cumu_freq = current_cumu / english_freq_sum[pos]
             rela_freq = english_freq_set[pos][i]/english_freq_sum[pos]
             english_info_dict[pos][token] = (cumu_freq, rela_freq)
@@ -182,10 +183,10 @@ def englishEmitToken(a,b,z):
 
 
 def englishGetToken(freq):
-    for token in english_info_dict[rotation,r]:
-        if english_info_dict[rotation.r][token][0] > freq:
+    for token in english_info_dict[rotation.r]:
+        if english_info_dict[rotation.r][token][0] + english_info_dict[rotation.r][token][1] >= freq:
             if rotation.r != 4:
-                rotation.r = rotatin.r + 1
+                rotation.r = rotation.r + 1
             else:
                 rotation.r = 1
             return token
@@ -206,7 +207,9 @@ def englishGetFreq(token):
 
 
 
-
+def GetToken(freq):
+    generate_english_cumu_frequency()
+    return englishGetToken(freq)
 
 
 
