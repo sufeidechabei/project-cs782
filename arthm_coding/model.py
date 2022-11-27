@@ -156,10 +156,10 @@ def generate_english_cumu_frequency():
             #print(len(english_token_set[pos]))
             #print(len(english_freq_set[pos]))
             token = english_token_set[pos][i]
-            current_cumu += english_freq_set[pos][i]
             cumu_freq = current_cumu / english_freq_sum[pos]
             rela_freq = english_freq_set[pos][i]/english_freq_sum[pos]
             english_info_dict[pos][token] = (cumu_freq, rela_freq)
+            current_cumu += english_freq_set[pos][i]
 
 
 def englishEmitToken(a,b,z):
