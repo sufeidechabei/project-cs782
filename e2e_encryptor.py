@@ -47,6 +47,10 @@ def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
     re_T = tknizer.tokenize(eng)
     print()
     print("Uniquely tokenizeable ? "+str(re_T == all_T)+"!")
+    if (re_T != all_T):
+        print(re_T)
+        print()
+        print(all_T)
     print()
     #tokens = T
     #en = en_gpt2.GPT2ArthmEncoder(l=16)
