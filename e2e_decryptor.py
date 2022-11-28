@@ -62,8 +62,7 @@ def run_decryption(eng, my_l, given_iv=None):
 if __name__ == "__main__":
     arglist = sys.argv[1:]
     if len(arglist) == 0:
-        print("Usage: python e2e_encryptor.py -l [coding range]")
-        print("Note that the sentence should have been generated with -a in encryptor")
+        print("Usage: python e2e_decryptor.py -l [coding range]")
         exit(0)
     options="l:s:a"
     long_options=["range","seed","iv"]

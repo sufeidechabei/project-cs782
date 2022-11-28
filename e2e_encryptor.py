@@ -74,8 +74,7 @@ def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
 if __name__ == "__main__":
     arglist = sys.argv[1:]
     if len(arglist) == 0:
-        print("Usage: python e2e_encryptor.py -l [coding range] -s [first phrase]")
-        print("add -a opt to include iv in the overall ciphertext")
+        print("Usage: python e2e_encryptor.py -l [coding range] -s [first word]")
         exit(0)
     options="l:s:a"
     long_options=["range","seed","iv"]
@@ -90,11 +89,10 @@ if __name__ == "__main__":
             add_iv = True
     print("coding range = "+str(my_l))
     print("first phrase = "+seed)
-    print("iv  included = "+str(add_iv))
     print()
     msg = input("Type your secret message:")
     while(1):
-        run_encryption(msg, my_l, seed, include_iv = add_iv)
+        run_encryption(msg, my_l, seed, include_iv = True)
         stop = input("\nPress enter to regenerate, or give any char and exit:")
         if len(stop) > 0:
             break

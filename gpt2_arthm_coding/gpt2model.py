@@ -12,7 +12,7 @@ def my_normalizer(tensor_vals):
     return list(np.exp(zz)/sum(np.exp(zz)))
 
 def should_ignore(token):
-    igs = ['\n','"','(',')']
+    igs = ['\n','"','(',')','<|endoftext|>']
     for ig in igs:
         if ig in token:
             return True
