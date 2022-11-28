@@ -8,7 +8,7 @@ THe gpt2_arthm_coding folder contains the version using gpt2.
 
 ## How to use
 
-Install PyTorch and and transformers and pycryptodome and termscolor
+Install PyTorch and and transformers and pycryptodome and termcolor
 
 To encrypt a message run:
 ```
