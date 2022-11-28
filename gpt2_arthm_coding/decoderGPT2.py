@@ -8,7 +8,7 @@ except ModuleNotFoundError as e:
 import math as math
 
 
-class PaperArthmDecoder:
+class GPT2ArthmDecoder:
 
     def __init__(self, l=4, r=8, code=None):
         self.r = r
