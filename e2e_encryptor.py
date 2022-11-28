@@ -43,14 +43,15 @@ def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
     all_T = [first_phrase] + T
     print(f"\nDecoding the cipher text took {t4 - t3:0.4f} s")
     eng = "".join(all_T)
-    re_T = tknizer.tokenize(eng)
+    eng_to_check = " "+(eng.split(" ",1)[1])
+    re_T = tknizer.tokenize(eng_to_check)
     print()
     print("Can be uniquely Tokenized? ",end="",flush=True)
-    if (re_T != all_T):
+    if (re_T != T):
         print(colored('No', 'red'))
         print(re_T)
         print()
-        print(all_T)
+        print(T)
     else:
         print(colored('Yes it can!','green'))
     print()

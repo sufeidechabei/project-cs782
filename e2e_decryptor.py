@@ -15,11 +15,12 @@ import sys
 from datetime import datetime
 
 
-def parse_eng(eng):
-   re_T = tknizer.tokenize(eng)
+def parse_eng(seed_and_eng):
+   bundle = seed_and_eng.split(" ",1)
+   seed = bundle[0]
+   eng = " "+bundle[1]
+   tokens = tknizer.tokenize(eng)
    print()
-   seed = re_T[0]
-   tokens = re_T[1:]
    print("Parsed  seed  = "+seed)
    print("Parsed T list = "+str(tokens))
    return seed, tokens
