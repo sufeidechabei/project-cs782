@@ -7,7 +7,7 @@ except ModuleNotFoundError as e:
 import math as math
 
 
-class PaperArthmEncoder:
+class GPT2ArthmEncoder:
 
     def __init__(self, l=4, r=8):
         self.r = r
