@@ -10,7 +10,7 @@ import math as math
 
 class GPT2ArthmDecoder:
 
-    def __init__(self, l=4, r=8, code=None):
+    def __init__(self, l=4, r=8, code=None, seed="I think"):
         self.r = r
         self.l = l
         self.w = [] # The D? No. The w
@@ -20,7 +20,7 @@ class GPT2ArthmDecoder:
         self.C = code
         self.C_cursor = l
         self.c_padding = 1
-        self.M = gpt2modellib.GPT2Model()
+        self.M = gpt2modellib.GPT2Model(first_phrase=seed)
         if code is None:
             exit(1)
         self.c = int.from_bytes(code[:self.l], byteorder='big', signed=False)

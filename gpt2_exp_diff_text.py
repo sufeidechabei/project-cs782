@@ -63,7 +63,7 @@ def run_single_exp(secret_msg, key):
     print(f"AES encryption took {t2 - t1:0.4f} s")
 
     code = ct
-    de = de_gpt2.GPT2ArthmDecoder(code = code)
+    de = de_gpt2.GPT2ArthmDecoder(l=16, code = code)
     t3 = time.perf_counter()
     print(f"Decoder intialization took {t3 - t2:0.4f} s")
     T = de.decode()
@@ -75,7 +75,7 @@ def run_single_exp(secret_msg, key):
     # We need to continue using T this time.
     # tokens = eng.split()
     tokens = T
-    en = en_gpt2.GPT2ArthmEncoder()
+    en = en_gpt2.GPT2ArthmEncoder(l=16)
     t5 = time.perf_counter()
     print(f"Encoder intialization took {t5 - t4:0.4f} s")
     D, w = en.encode(tokens)

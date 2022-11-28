@@ -13,13 +13,13 @@ def my_normalizer(tensor_val):
 class GPT2Model:
     
 
-    def __init__(self):
+    def __init__(self, first_phrase="I think"):
         # GPT-2 and Pytorch params
         self.toker = AutoTokenizer.from_pretrained("gpt2")
         self.model = AutoModelForCausalLM.from_pretrained("gpt2")
         # Our model specific
         self.k_value = 8
-        self.initial_seed = "I think"
+        self.initial_seed = first_phrase
         self.current_seed = self.initial_seed
         self.current_token_distro = []
         # Initialize to get the first token.

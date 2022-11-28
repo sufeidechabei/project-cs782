@@ -10,7 +10,7 @@ SamplePlainText = [b"Hello World!",
         ]
 
 def test():
-    key = get_random_bytes(32)
+    key = get_random_bytes(16)
 
     print("Key is "+key.hex())
     print()

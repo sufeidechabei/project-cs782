@@ -1,0 +1,5 @@
+1. Sentence looks weird in ending
+2. Also the beginning
+3. TopK performance issue
+4. TopN tokenizer unimplemented.
+
