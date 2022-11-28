@@ -19,6 +19,10 @@ def run_exp(secret_msg):
         res = run_single_exp(secret_msg, key)
         if res[0] == 1:
             break
+        else:
+            print(res[1])
+            print(res[2])
+            exit(1)
     print()
     print("Ran "+str(counter)+" times to successuflly encrypt '"+secret_msg+"'")
     print("----------------------------------------------------------------------------------------------")
@@ -71,6 +75,7 @@ def run_single_exp(secret_msg, key):
     print(f"Decoding the cipher text took {t4 - t3:0.4f} s")
 
     eng = "".join(T)
+    eng = "I think"+eng
 
     # We need to continue using T this time.
     # tokens = eng.split()
@@ -83,11 +88,17 @@ def run_single_exp(secret_msg, key):
     print(f"Encoding generated sentences took {t6 - t5:0.4f} s")
     new_ct = bytes(D)
 
-
-    try:
-        new_msg = crypto.decrypt_aes_cbc(key, iv, new_ct)
-    except:
-        return (0,ct.hex(),new_ct.hex()+" w="+str(len(w)),"")
+    success = False
+    while not success:
+        try:
+            new_msg = crypto.decrypt_aes_cbc(key, iv, new_ct)
+            break
+        except:
+            if new_ct[-1] == 1:
+                new_ct = new_ct[:-1]
+                print("Last one failed. try this new ct="+new_ct.hex())
+                continue
+            return (0,ct.hex(),new_ct.hex()+" w="+str(len(w))+"\nSentence="+eng,"")
     if new_msg == secret_msg:
         return (1, ct.hex(),eng,"")
     else:
@@ -100,8 +111,8 @@ def run_single_exp(secret_msg, key):
 
 run_exp("UW - Madison")
 run_exp("AF may lack fresh water!")
-run_exp("Ba Yue Qiu Gao Feng Nu Hao, Juan Wo Wu Shang San Chong Mao.")
-run_exp("..__.._.._..._..___..._.._...__.__..")
+#run_exp("Ba Yue Qiu Gao Feng Nu Hao, Juan Wo Wu Shang San Chong Mao.")
+#run_exp("..__.._.._..._..___..._.._...__.__..")
 
 #print()
     #print("breaking into chunks")

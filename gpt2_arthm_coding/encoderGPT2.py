@@ -9,14 +9,14 @@ import math as math
 
 class GPT2ArthmEncoder:
 
-    def __init__(self, l=4, r=8):
+    def __init__(self, l=4, r=8, seed="I think"):
         self.r = r
         self.l = l
         self.w = [] # The D? No. The w
         self.a = 0
         self.b = 1 << (self.r * self.l)
         self.magic_num = 0x80
-        self.M = gpt2modellib.GPT2Model()
+        self.M = gpt2modellib.GPT2Model(first_phrase=seed)
 
     def adjust(self, token):
         cumu, relative = self.M.GetFreq(token)

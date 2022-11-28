@@ -5,10 +5,18 @@ from transformers import AutoModelForCausalLM, \
 import numpy as np
 
 
-def my_normalizer(tensor_val):
-    return -100 / tensor_val
+def my_normalizer(tensor_vals):
+    z = np.array(tensor_vals)
+    beta = 1
+    zz = z / beta
+    return list(np.exp(zz)/sum(np.exp(zz)))
 
-
+def should_ignore(token):
+    igs = ['\n','"','(',')']
+    for ig in igs:
+        if ig in token:
+            return True
+    return False
 
 class GPT2Model:
     
@@ -18,7 +26,7 @@ class GPT2Model:
         self.toker = AutoTokenizer.from_pretrained("gpt2")
         self.model = AutoModelForCausalLM.from_pretrained("gpt2")
         # Our model specific
-        self.k_value = 8
+        self.k_value = 100
         self.initial_seed = first_phrase
         self.current_seed = self.initial_seed
         self.current_token_distro = []
@@ -36,18 +44,23 @@ class GPT2Model:
         # logitis generated. now we can start calcualte the probabilities.
         # firstly normalie the tensor vals
         tensor_vals = logits.topk(self.k_value).values.tolist()[0]
-        normalized_vals = []
-        normalized_sum = 0
-        for tensor_val in tensor_vals:
-            # get each tensor value normalized
-            n = my_normalizer(tensor_val)
-            normalized_vals.append(n)
-            normalized_sum = normalized_sum + n
         # now get the tokens list
         token_indices = logits.topk(self.k_value).indices.tolist()[0]
         tokens_list = []
         for index in token_indices:
             tokens_list.append(self.toker.decode(index))
+        # prune the ignored ones
+        normalized_sum = 0
+        tmp_t = []
+        tmp_v = []
+        for i in range(0,len(tokens_list)):
+            if not should_ignore(tokens_list[i]):
+                tmp_t.append(tokens_list[i])
+                tmp_v.append(tensor_vals[i])
+        normalized_vals = my_normalizer(tmp_v)
+        tokens_list = tmp_t
+        for v in normalized_vals:
+            normalized_sum += v
         # now the probabilities
         self.current_token_distro = []
         current_cumu = 0

@@ -5,6 +5,8 @@ import crypto.util as crypto
 import gpt2_arthm_coding.encoderGPT2 as en_gpt2
 import gpt2_arthm_coding.decoderGPT2 as de_gpt2
 
+import e2e_tokenizer as tknizer
+
 import time
 
 import getopt
@@ -38,13 +40,14 @@ def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
     all_T = [first_phrase] + T
     print(f"Decoding the cipher text took {t4 - t3:0.4f} s")
     print()
-    print("In list format:")
-    print(all_T)
-    print()
-    print("In English sentence:")
+    print("===================== Generated English Sentence ========================")
     eng = "".join(all_T)
     print(eng)
-
+    print("=========================================================================")
+    re_T = tknizer.tokenize(eng)
+    print()
+    print("Uniquely tokenizeable ? "+str(re_T == all_T)+"!")
+    print()
     #tokens = T
     #en = en_gpt2.GPT2ArthmEncoder(l=16)
     #t5 = time.perf_counter()
@@ -90,4 +93,9 @@ if __name__ == "__main__":
     print("iv  included = "+str(add_iv))
     print()
     msg = input("Type your secret message:")
-    run_encryption(msg, my_l, seed, include_iv = add_iv)
+    while(1):
+        run_encryption(msg, my_l, seed, include_iv = add_iv)
+        stop = input("\nPress enter to regenerate, or give any char and exit:")
+        if len(stop) > 0:
+            break
+        

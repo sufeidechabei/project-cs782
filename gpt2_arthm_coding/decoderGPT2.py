@@ -85,7 +85,7 @@ class GPT2ArthmDecoder:
                     self.invert_range()
                 else:
                     D.append(symbol)
-            if len(D) >= len(self.C):
+            if len(D) >= len(self.C) and (token[0] == '.' or token[0] == '?' or token[0] == '!'):
                 break
             self.M.next(token)
         return T

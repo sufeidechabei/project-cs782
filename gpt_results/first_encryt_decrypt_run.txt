@@ -1,0 +1,69 @@
+[xu@xu-virtual-machine project-cs782]$  
+[xu@xu-virtual-machine project-cs782]$  
+[xu@xu-virtual-machine project-cs782]$  
+[xu@xu-virtual-machine project-cs782]$  
+[xu@xu-virtual-machine project-cs782]$  
+[xu@xu-virtual-machine project-cs782]$  
+[xu@xu-virtual-machine project-cs782]$  python e2e_encryptor.py 
+Usage: python e2e_encryptor.py -l [coding range] -s [first phrase]
+add -a opt to include iv in the overall ciphertext
+[xu@xu-virtual-machine project-cs782]$  python e2e_encryptor.py -l 16 -s "Chicken" -a
+coding range = 16
+first phrase = Chicken
+iv  included = True
+
+Type your secret message:UW-Madison
+
+Start encryption for 'UW-Madison'
+
+AES encryption took 0.0002 s
+Generated ciphertext=8c30b0bb843ef448e56173799120206e  iv=335d3281a5bcfc8c70989c25ded63d6a
+Arithmatic decoder intialization took 3.6410 s
+Decoding the cipher text took 6.4338 s
+
+===================== Generated English Sentence ========================
+Chicken.tf will not work as expected, this will be fixed soon. — Kukanju S1K — Kukanju S1K, the creator of the RASO2 server has announced that RASO2 servers will be up every 48 hours! This will also continue on Sunday, July 2 at 0722 GMT.
+=========================================================================
+
+Uniquely tokenizeable ? True!
+
+
+Press enter to regenerate, or give any char and exit:
+
+Start encryption for 'UW-Madison'
+
+AES encryption took 0.0006 s
+Generated ciphertext=c5ea5dabd17d4890eb557a064cb40bcf  iv=5d007365ba5c31f05b70d198ee6cc56b
+Arithmatic decoder intialization took 3.2535 s
+Decoding the cipher text took 7.4609 s
+
+===================== Generated English Sentence ========================
+Chicken is better with the salt. You should try it with cream or whatever it is they need.<|endoftext|>Here are some of the best deals on your business:<|endoftext|>Image caption The police used a bomb to bring down a tractor on the White Sands Highway near Buffalo, New York, in 2011. No weapon was used on British soil, but the explosives were detonated near a police patrol car.
+=========================================================================
+
+Uniquely tokenizeable ? True!
+
+
+Press enter to regenerate, or give any char and exit:l
+[xu@xu-virtual-machine project-cs782]$  python e2e_decryptor.py -l 16
+coding range = 16
+
+Type the english sentence found:Chicken is better with the salt. You should try it with cream or whatever it is they need.<|endoftext|>Here are some of the best deals on your business:<|endoftext|>Image caption The police used a bomb to bring down a tractor on the White Sands Highway near Buffalo, New York, in 2011. No weapon was used on British soil, but the explosives were detonated near a police patrol car.
+
+Parsed  seed  = Chicken
+Parsed T list = [' is', ' better', ' with', ' the', ' salt', '.', ' You', ' should', ' try', ' it', ' with', ' cream', ' or', ' whatever', ' it', ' is', ' they', ' need', '.', '<|endoftext|>', 'Here', ' are', ' some', ' of', ' the', ' best', ' deals', ' on', ' your', ' business', ':', '<|endoftext|>', 'Image', ' caption', ' The', ' police', ' used', ' a', ' bomb', ' to', ' bring', ' down', ' a', ' tractor', ' on', ' the', ' White', ' Sands', ' Highway', ' near', ' Buffalo', ',', ' New', ' York', ',', ' in', ' 2011', '.', ' No', ' weapon', ' was', ' used', ' on', ' British', ' soil', ',', ' but', ' the', ' explosives', ' were', ' detonated', ' near', ' a', ' police', ' patrol', ' car', '.']
+
+Parsing & Encoder intialization took 6.2923 s
+Encoding generated sentences took 7.4983 s
+
+Obtained iv=5d007365ba5c31f05b70d198ee6cc56b
+Obtained ct=c5ea5dabd17d4890eb557a064cb40bcf010101
+
+Last one failed. try this new ct=c5ea5dabd17d4890eb557a064cb40bcf0101
+Last one failed. try this new ct=c5ea5dabd17d4890eb557a064cb40bcf01
+Last one failed. try this new ct=c5ea5dabd17d4890eb557a064cb40bcf
+
+===========================  Secret Message  ============================
+UW-Madison
+=========================================================================
+
