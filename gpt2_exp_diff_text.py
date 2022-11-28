@@ -5,6 +5,7 @@ import crypto.util as crypto
 import gpt2_arthm_coding.encoderGPT2 as en_gpt2
 import gpt2_arthm_coding.decoderGPT2 as de_gpt2
 
+import time
 
 from datetime import datetime
 
@@ -55,18 +56,31 @@ def run_exp(secret_msg):
 
 
 def run_single_exp(secret_msg, key):
+    print("Encryption begin ......")
+    t1 = time.perf_counter()
     iv, ct = crypto.encrypt_aes_cbc(key, secret_msg)
+    t2 = time.perf_counter()
+    print(f"AES encryption took {t2 - t1:0.4f} s")
 
     code = ct
     de = de_gpt2.GPT2ArthmDecoder(code = code)
+    t3 = time.perf_counter()
+    print(f"Decoder intialization took {t3 - t2:0.4f} s")
     T = de.decode()
+    t4 = time.perf_counter()
+    print(f"Decoding the cipher text took {t4 - t3:0.4f} s")
+
     eng = "".join(T)
 
     # We need to continue using T this time.
     # tokens = eng.split()
     tokens = T
     en = en_gpt2.GPT2ArthmEncoder()
+    t5 = time.perf_counter()
+    print(f"Encoder intialization took {t5 - t4:0.4f} s")
     D, w = en.encode(tokens)
+    t6 = time.perf_counter()
+    print(f"Encoding generated sentences took {t6 - t5:0.4f} s")
     new_ct = bytes(D)
 
 
