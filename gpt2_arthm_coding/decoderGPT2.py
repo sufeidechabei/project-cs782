@@ -20,6 +20,7 @@ class GPT2ArthmDecoder:
         self.C = code
         self.C_cursor = l
         self.c_padding = 1
+        self.M = gpt2modellib.GPT2Model()
         if code is None:
             exit(1)
         self.c = int.from_bytes(code[:self.l], byteorder='big', signed=False)
@@ -31,8 +32,8 @@ class GPT2ArthmDecoder:
         return diff1 / diff2
         
 
-    def adjust(self, token, model_name = None):
-        cumu, relative = model.GetFreq(token, model_name)
+    def adjust(self, token):
+        cumu, relative = self.M.GetFreq(token)
         diff = self.b - self.a
         self.b = self.a + math.floor((cumu + relative) * diff)
         self.a = self.a + math.floor(cumu * diff)
@@ -45,15 +46,14 @@ class GPT2ArthmDecoder:
             self.c = self.c ^ mask
 
 
-    def decode(self, model_name = None):
+    def decode(self):
         """ Follow their written version and pseudo-code in blend """
         D = []
         T = []
-        model.reset()
         while (True):
-            token = model.GetToken(self.target_frequency())
+            token = self.M.GetToken(self.target_frequency())
             T.append(token)
-            self.adjust(token, model_name)
+            self.adjust(token)
             shift_amount = self.r*self.l - 1
             dbf_a = self.a >>  shift_amount
             dbf_b = self.b-1 >> shift_amount
@@ -87,6 +87,7 @@ class GPT2ArthmDecoder:
                     D.append(symbol)
             if len(D) >= len(self.C):
                 break
+            self.M.next(token)
         return T
                     
 def bin32(x):

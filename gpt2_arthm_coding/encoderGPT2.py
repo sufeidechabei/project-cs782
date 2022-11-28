@@ -16,9 +16,10 @@ class GPT2ArthmEncoder:
         self.a = 0
         self.b = 1 << (self.r * self.l)
         self.magic_num = 0x80
+        self.M = gpt2modellib.GPT2Model()
 
-    def adjust(self, token, model_name = None):
-        cumu, relative = model.GetFreq(token, model_name)
+    def adjust(self, token):
+        cumu, relative = self.M.GetFreq(token)
         diff = self.b - self.a
         self.b = self.a + math.floor((cumu + relative) * diff)
         self.a = self.a + math.floor(cumu * diff)
@@ -29,12 +30,11 @@ class GPT2ArthmEncoder:
         self.b = self.b ^ mask
 
 
-    def encode(self, token_list, model_name = None):
+    def encode(self, token_list):
         """ Follow their written version and pseudo-code in blend """
         D = []
-        model.reset()
         for token in token_list:
-            self.adjust(token, model_name)
+            self.adjust(token)
             dbf_a = self.a >> self.r*self.l-1
             dbf_b = self.b - 1 >> self.r*self.l-1
             if len(self.w) > 0 and dbf_a == dbf_b:
@@ -55,6 +55,7 @@ class GPT2ArthmEncoder:
                     self.invert_range()
                 else:
                     D.append(symbol)
+            self.M.next(token)
         return D, self.w
                     
 def bin32(x):
