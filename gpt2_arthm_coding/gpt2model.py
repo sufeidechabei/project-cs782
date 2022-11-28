@@ -7,7 +7,7 @@ import numpy as np
 
 def my_normalizer(tensor_vals):
     z = np.array(tensor_vals)
-    beta = 1
+    beta = 1.0
     zz = z / beta
     return list(np.exp(zz)/sum(np.exp(zz)))
 
