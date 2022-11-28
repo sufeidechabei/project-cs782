@@ -1,6 +1,6 @@
 """ Too Simple of a test """
 import binascii as binascii
-
+from termcolor import colored
 import crypto.util as crypto
 import gpt2_arthm_coding.encoderGPT2 as en_gpt2
 import gpt2_arthm_coding.decoderGPT2 as de_gpt2
@@ -35,22 +35,24 @@ def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
     de = de_gpt2.GPT2ArthmDecoder(l=my_l, code = code, seed=first_phrase)
     t3 = time.perf_counter()
     print(f"Arithmatic decoder intialization took {t3 - t2:0.4f} s")
-    T = de.decode()
-    t4 = time.perf_counter()
-    all_T = [first_phrase] + T
-    print(f"Decoding the cipher text took {t4 - t3:0.4f} s")
     print()
     print("===================== Generated English Sentence ========================")
-    eng = "".join(all_T)
-    print(eng)
+    T = de.decode()
     print("=========================================================================")
+    t4 = time.perf_counter()
+    all_T = [first_phrase] + T
+    print(f"\nDecoding the cipher text took {t4 - t3:0.4f} s")
+    eng = "".join(all_T)
     re_T = tknizer.tokenize(eng)
     print()
-    print("Uniquely tokenizeable ? "+str(re_T == all_T)+"!")
+    print("Can be uniquely Tokenized? ",end="",flush=True)
     if (re_T != all_T):
+        print(colored('No', 'red'))
         print(re_T)
         print()
         print(all_T)
+    else:
+        print(colored('Yes it can!','green'))
     print()
     #tokens = T
     #en = en_gpt2.GPT2ArthmEncoder(l=16)

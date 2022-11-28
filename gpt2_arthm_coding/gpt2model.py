@@ -26,7 +26,7 @@ class GPT2Model:
         self.toker = AutoTokenizer.from_pretrained("gpt2")
         self.model = AutoModelForCausalLM.from_pretrained("gpt2")
         # Our model specific
-        self.k_value = 100
+        self.k_value = 3000
         self.initial_seed = first_phrase
         self.current_seed = self.initial_seed
         self.current_token_distro = []

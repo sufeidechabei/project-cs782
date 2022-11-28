@@ -54,6 +54,7 @@ def run_decryption(eng, my_l, given_iv=None):
                 continue
             print("Really failed this time")
             exit(1)
+    print("Succeeded!!!")
     print()
     print("===========================  Secret Message  ============================")
     print(new_msg)

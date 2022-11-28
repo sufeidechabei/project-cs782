@@ -4,6 +4,7 @@ try:
 except ModuleNotFoundError as e:
     import gpt2model as gpt2modellib
 
+from termcolor import colored
 
 import math as math
 
@@ -21,6 +22,7 @@ class GPT2ArthmDecoder:
         self.C_cursor = l
         self.c_padding = 1
         self.M = gpt2modellib.GPT2Model(first_phrase=seed)
+        self.seed = seed
         if code is None:
             exit(1)
         self.c = int.from_bytes(code[:self.l], byteorder='big', signed=False)
@@ -50,6 +52,7 @@ class GPT2ArthmDecoder:
         """ Follow their written version and pseudo-code in blend """
         D = []
         T = []
+        print(self.seed,end="",flush=True)
         while (True):
             token = self.M.GetToken(self.target_frequency())
             T.append(token)
@@ -85,7 +88,12 @@ class GPT2ArthmDecoder:
                     self.invert_range()
                 else:
                     D.append(symbol)
+            if len(D) >= len(self.C):
+                print(colored(token,'yellow'),end="",flush=True)
+            else:
+                print(token,end="",flush=True)
             if len(D) >= len(self.C) and (token[0] == '.' or token[0] == '?' or token[0] == '!'):
+                print()
                 break
             self.M.next(token)
         return T

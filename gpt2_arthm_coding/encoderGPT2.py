@@ -33,7 +33,9 @@ class GPT2ArthmEncoder:
     def encode(self, token_list):
         """ Follow their written version and pseudo-code in blend """
         D = []
+        print("\nEncoding",end="",flush=True)
         for token in token_list:
+            print(".",end="",flush=True)
             self.adjust(token)
             dbf_a = self.a >> self.r*self.l-1
             dbf_b = self.b - 1 >> self.r*self.l-1
@@ -56,6 +58,8 @@ class GPT2ArthmEncoder:
                 else:
                     D.append(symbol)
             self.M.next(token)
+        print()
+        print()
         return D, self.w
                     
 def bin32(x):
