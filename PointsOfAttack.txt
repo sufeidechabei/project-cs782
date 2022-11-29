@@ -3,3 +3,6 @@
 3. TopK performance issue
 4. TopN tokenizer unimplemented.
 
+Seed selection
+Speeding up 
+
