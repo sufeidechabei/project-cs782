@@ -7,7 +7,7 @@ except ModuleNotFoundError as e:
 from termcolor import colored
 
 import math as math
-
+import random as rng
 
 class GPT2ArthmDecoder:
 
@@ -82,7 +82,7 @@ class GPT2ArthmDecoder:
                         self.C_cursor = self.C_cursor + 1
                         self.c = self.c + next_byte
                     else:
-                        self.c = self.c + self.c_padding
+                        self.c = self.c + rng.randint(0,255)
                 if self.a > self.b:
                     self.w.append(symbol)
                     self.invert_range()

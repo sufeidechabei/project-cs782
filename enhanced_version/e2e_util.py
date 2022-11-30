@@ -30,3 +30,12 @@ def sample_seed():
     rand_index = rng.randint(0, len(seed_data)-1)
     return seed_data[rand_index]
 
+
+def extract_iv_ct(raw_bytes):
+    if len(raw_bytes) < 32:
+        return raw_bytes, raw_bytes
+    iv = raw_bytes[:16]
+    ct = raw_bytes[16:]
+    extra_pads = -1 * (len(ct) % 16)
+    real_ct = ct[:extra_pads]
+    return iv, real_ct
