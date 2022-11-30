@@ -92,11 +92,11 @@ class GPT2ArthmDecoder:
                 print(colored(token,'yellow'),end="",flush=True)
             else:
                 print(token,end="",flush=True)
-            if len(D) >= len(self.C) and (token[0] == '.' or token[0] == '?' or token[0] == '!'):
+            if (token[0] == '.' or token[0] == '?' or token[0] == '!'):
                 print()
                 break
             self.M.next(token)
-        return T
+        return T, len(D)
                     
 def bin32(x):
     return bin(x)[2:].zfill(32)

@@ -32,29 +32,36 @@ def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
     else:
         code = ct
 
-    de = de_gpt2.GPT2ArthmDecoder(l=my_l, code = code, seed=first_phrase)
-    t3 = time.perf_counter()
-    print(f"Arithmatic decoder intialization took {t3 - t2:0.4f} s")
-    print()
-    print("===================== Generated English Sentence ========================")
-    T = de.decode()
-    print("=========================================================================")
-    t4 = time.perf_counter()
-    all_T = [first_phrase] + T
-    print(f"\nDecoding the cipher text took {t4 - t3:0.4f} s")
-    eng = "".join(all_T)
-    eng_to_check = " "+(eng.split(" ",1)[1])
-    re_T = tknizer.tokenize(eng_to_check)
-    print()
-    print("Can be uniquely Tokenized? ",end="",flush=True)
-    if (re_T != T):
-        print(colored('No', 'red'))
-        print(re_T)
+    BigD = 0
+    BigD_target = len(code)
+    while (BigD < BigD_target):
+        print("**** Now decoding :"+code.hex())
+        de = de_gpt2.GPT2ArthmDecoder(l=my_l, code = code, seed=first_phrase)
+        t3 = time.perf_counter()
+        print(f"Arithmatic decoder intialization took {t3 - t2:0.4f} s")
         print()
-        print(T)
-    else:
-        print(colored('Yes it can!','green'))
-    print()
+        print("===================== Generated English Sentence ========================")
+        T, dlen = de.decode()
+        print("=========================================================================")
+        t4 = time.perf_counter()
+        all_T = [first_phrase] + T
+        print(f"\nDecoding the cipher text took {t4 - t3:0.4f} s")
+        eng = "".join(all_T)
+        eng_to_check = " "+(eng.split(" ",1)[1])
+        re_T = tknizer.tokenize(eng_to_check)
+        print()
+        print("Can be uniquely Tokenized? ",end="",flush=True)
+        if (re_T != T):
+            print(colored('No', 'red'))
+            #print(re_T)
+            #print()
+            #print(T)
+        else:
+            print(colored('Yes it can!','green'))
+        print("dlen"+str(dlen))
+        print()
+        BigD += dlen
+        code = code[dlen:]
     #tokens = T
     #en = en_gpt2.GPT2ArthmEncoder(l=16)
     #t5 = time.perf_counter()
