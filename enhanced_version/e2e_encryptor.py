@@ -78,12 +78,15 @@ def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
 if __name__ == "__main__":
     arglist = sys.argv[1:]
     if len(arglist) == 0:
-        print("Usage: python e2e_encryptor.py -l [coding range] -s [first word]")
-        exit(0)
+        print("To be more specified, run ./e2e_encryptor.py -l [coding range (32 as default)] -s [first word]")
+    print()
     options="l:s:a"
     long_options=["range","seed","iv"]
     arguments, values = getopt.getopt(arglist, options, long_options)
     add_iv = False
+    seed = None
+    rand_seed = False
+    my_l = 32
     for curarg, curval in arguments:
         if curarg == "-l":
             my_l = int(curval)
@@ -91,13 +94,20 @@ if __name__ == "__main__":
             seed = curval
         if curarg == "-a":
             add_iv = True
-    print("coding range = "+str(my_l))
-    print("first phrase = "+seed)
+    if seed is None:
+        seed = util.sample_seed()
+        rand_seed = True
+        print("No first word provided. Randomly using one of ours.")
+    print("coding range= "+str(my_l))
+    print("first  word = "+seed)
     print()
     msg = input("Type your secret message:")
     while(1):
         run_encryption(msg, my_l, seed, include_iv = True)
-        stop = input("\nPress enter to regenerate, or give any char and exit:")
+        stop = input("\nPress enter to regenerate or type anything to exit:")
         if len(stop) > 0:
             break
-        
+        if rand_seed:
+            seed = util.sample_seed()
+            print("\nUsing a new first word = "+seed+" \n")
+           

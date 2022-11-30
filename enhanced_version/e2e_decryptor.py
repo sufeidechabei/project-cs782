@@ -73,12 +73,13 @@ def run_decryption(eng, my_l, given_iv=None):
 if __name__ == "__main__":
     arglist = sys.argv[1:]
     if len(arglist) == 0:
-        print("Usage: python e2e_decryptor.py -l [coding range]")
-        exit(0)
+        print("To be more specified, run ./e2e_decryptor.py -l [coding range (32 as default)]")
+    print()
     options="l:s:a"
     long_options=["range","seed","iv"]
     arguments, values = getopt.getopt(arglist, options, long_options)
     add_iv = False
+    my_l = 32
     for curarg, curval in arguments:
         if curarg == "-l":
             my_l = int(curval)

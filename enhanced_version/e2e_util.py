@@ -4,6 +4,8 @@ from transformers import AutoModelForCausalLM, \
 # from torch import nn
 import numpy as np
 
+import random as rng
+
 def tokenize(full_eng, toker, model):
     """Parse out the seed and the tokens from the provided english"""   
     bundle = full_eng.split(" ",1)
@@ -20,4 +22,11 @@ def tokenize(full_eng, toker, model):
         tokens.append(word)
     return seed, tokens
 
+
+
+def sample_seed():
+    """ Sample a random seed from our pre-configured seed set"""
+    seed_data = ['Although', 'As', 'Because', 'Before', 'If', 'Since', 'Unless', 'Until', 'When', 'While', 'I', 'You', 'He', 'She', 'We', 'They', 'It', 'Do', 'What', 'Where', 'Why', 'Could', 'The', 'Because', 'Does', 'So', 'This', 'That', 'My', 'Your', 'His', 'Her', 'Their', 'Our', 'Its', 'Dogs', 'Cats', 'Cheese', 'Trump', 'Biden', 'Democrats', 'Republicans', 'How', 'People', 'A', 'Pizza', 'Chinese', 'To', 'Have', 'Maybe']
+    rand_index = rng.randint(0, len(seed_data)-1)
+    return seed_data[rand_index]
 
