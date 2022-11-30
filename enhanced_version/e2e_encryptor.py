@@ -6,7 +6,7 @@ import crypto.util as crypto
 import gpt2_arthm_coding.encoderGPT2 as en_gpt2
 import gpt2_arthm_coding.decoderGPT2 as de_gpt2
 
-import e2e_tokenizer as tknizer
+import e2e_util as util
 
 import time
 
@@ -57,8 +57,7 @@ def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
     all_T = [first_phrase] + T
     print(f"\nDecoding the cipher text took {t4 - t3:0.4f} s")
     eng = "".join(all_T)
-    eng_to_check = " "+(eng.split(" ",1)[1])
-    re_T = tknizer.tokenize(eng_to_check, toker, model)
+    parsed_seed, re_T = util.tokenize(eng, toker, model)
     print()
     print("Can be uniquely Tokenized? ",end="",flush=True)
     if (re_T != T):
@@ -66,6 +65,9 @@ def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
         print(re_T)
         print()
         print(T)
+    elif (parsed_seed != first_phrase):
+        print(colored('No! tokens match but seeds do not match:', 'red'))
+        print("real seed = "+first_phrase+"  but parsed seed = "+parsed_seed)
     else:
         print(colored('Yes it can!','green'))
 

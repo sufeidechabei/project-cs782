@@ -6,7 +6,7 @@ import crypto.util as crypto
 import gpt2_arthm_coding.encoderGPT2 as en_gpt2
 import gpt2_arthm_coding.decoderGPT2 as de_gpt2
 
-import e2e_tokenizer as tknizer
+import e2e_util as util
 
 import time
 
@@ -26,16 +26,6 @@ def initialize_GPT2():
     return toker, model
 
 
-def parse_eng(seed_and_eng, toker, model):
-   bundle = seed_and_eng.split(" ",1)
-   seed = bundle[0]
-   eng = " "+bundle[1]
-   tokens = tknizer.tokenize(eng, toker, model)
-   print()
-   print("Parsed  seed  = "+seed)
-   print("Parsed T list = "+str(tokens))
-   return seed, tokens
-
 def run_decryption(eng, my_l, given_iv=None):
     t0 = time.perf_counter()
     toker, model = initialize_GPT2()
@@ -43,7 +33,10 @@ def run_decryption(eng, my_l, given_iv=None):
     t1 = time.perf_counter()
     print(f"GPT-2 toker and model took {t1 - t0:0.4f} s to initialize.");
     t4 = time.perf_counter()
-    first_phrase, tokens = parse_eng(eng, toker, model)
+    first_phrase, tokens = util.tokenize(eng, toker, model)
+    print(" Seed  = "+first_phrase)
+    print("Tokens = "+str(tokens))
+
     en = en_gpt2.GPT2ArthmEncoder(l=my_l, seed=first_phrase, toker=toker, model=model)
     t5 = time.perf_counter()
     print(f"\nParsing & Encoder intialization took {t5 - t4:0.4f} s")
