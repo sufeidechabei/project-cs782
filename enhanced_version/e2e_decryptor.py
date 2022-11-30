@@ -1,4 +1,5 @@
-""" Too Simple of a test """
+#!/usr/bin/env python3
+""" English-to-English(E2E) Decryption Tool """
 import binascii as binascii
 
 import crypto.util as crypto
@@ -12,23 +13,38 @@ import time
 import getopt
 import sys
 
+import torch
+from transformers import AutoModelForCausalLM, \
+  AutoTokenizer
+
+
 from datetime import datetime
 
+def initialize_GPT2():
+    toker = AutoTokenizer.from_pretrained("gpt2")
+    model = AutoModelForCausalLM.from_pretrained("gpt2")
+    return toker, model
 
-def parse_eng(seed_and_eng):
+
+def parse_eng(seed_and_eng, toker, model):
    bundle = seed_and_eng.split(" ",1)
    seed = bundle[0]
    eng = " "+bundle[1]
-   tokens = tknizer.tokenize(eng)
+   tokens = tknizer.tokenize(eng, toker, model)
    print()
    print("Parsed  seed  = "+seed)
    print("Parsed T list = "+str(tokens))
    return seed, tokens
 
 def run_decryption(eng, my_l, given_iv=None):
+    t0 = time.perf_counter()
+    toker, model = initialize_GPT2()
+    print()
+    t1 = time.perf_counter()
+    print(f"GPT-2 toker and model took {t1 - t0:0.4f} s to initialize.");
     t4 = time.perf_counter()
-    first_phrase, tokens = parse_eng(eng)
-    en = en_gpt2.GPT2ArthmEncoder(l=my_l, seed=first_phrase)
+    first_phrase, tokens = parse_eng(eng, toker, model)
+    en = en_gpt2.GPT2ArthmEncoder(l=my_l, seed=first_phrase, toker=toker, model=model)
     t5 = time.perf_counter()
     print(f"\nParsing & Encoder intialization took {t5 - t4:0.4f} s")
     D, w = en.encode(tokens)

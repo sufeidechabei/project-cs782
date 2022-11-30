@@ -1,4 +1,5 @@
-""" Too Simple of a test """
+#!/usr/bin/env python3
+""" English-to-English(E2E) Encryption Tool """
 import binascii as binascii
 from termcolor import colored
 import crypto.util as crypto
@@ -12,15 +13,28 @@ import time
 import getopt
 import sys
 
+import torch
+from transformers import AutoModelForCausalLM, \
+  AutoTokenizer
+
+
 from datetime import datetime
+
+
+def initialize_GPT2():
+    toker = AutoTokenizer.from_pretrained("gpt2")
+    model = AutoModelForCausalLM.from_pretrained("gpt2")
+    return toker, model
 
 
 def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
 
-
+    t0 = time.perf_counter()
+    toker, model = initialize_GPT2()
     print()
-    print("Start encryption for '"+secret_msg+"'\n")
     t1 = time.perf_counter()
+    print(f"GPT-2 toker and model took {t1 - t0:0.4f} s to initialize.");
+    print("Start encryption for '"+secret_msg+"'\n")
     key = crypto.obtain_key("e2e")
     iv, ct = crypto.encrypt_aes_cbc(key, secret_msg)
     t2 = time.perf_counter()
@@ -32,54 +46,28 @@ def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
     else:
         code = ct
 
-    BigD = 0
-    BigD_target = len(code)
-    while (BigD < BigD_target):
-        print("**** Now decoding :"+code.hex())
-        de = de_gpt2.GPT2ArthmDecoder(l=my_l, code = code, seed=first_phrase)
-        t3 = time.perf_counter()
-        print(f"Arithmatic decoder intialization took {t3 - t2:0.4f} s")
+    de = de_gpt2.GPT2ArthmDecoder(l=my_l, code = code, seed=first_phrase, toker=toker, model=model)
+    t3 = time.perf_counter()
+    print(f"Arithmatic decoder intialization took {t3 - t2:0.4f} s")
+    print()
+    print("===================== Generated English Sentence ========================")
+    T = de.decode()
+    print("=========================================================================")
+    t4 = time.perf_counter()
+    all_T = [first_phrase] + T
+    print(f"\nDecoding the cipher text took {t4 - t3:0.4f} s")
+    eng = "".join(all_T)
+    eng_to_check = " "+(eng.split(" ",1)[1])
+    re_T = tknizer.tokenize(eng_to_check, toker, model)
+    print()
+    print("Can be uniquely Tokenized? ",end="",flush=True)
+    if (re_T != T):
+        print(colored('No! Here are there contents:', 'red'))
+        print(re_T)
         print()
-        print("===================== Generated English Sentence ========================")
-        T, dlen = de.decode()
-        print("=========================================================================")
-        t4 = time.perf_counter()
-        all_T = [first_phrase] + T
-        print(f"\nDecoding the cipher text took {t4 - t3:0.4f} s")
-        eng = "".join(all_T)
-        eng_to_check = " "+(eng.split(" ",1)[1])
-        re_T = tknizer.tokenize(eng_to_check)
-        print()
-        print("Can be uniquely Tokenized? ",end="",flush=True)
-        if (re_T != T):
-            print(colored('No', 'red'))
-            #print(re_T)
-            #print()
-            #print(T)
-        else:
-            print(colored('Yes it can!','green'))
-        print("dlen"+str(dlen))
-        print()
-        BigD += dlen
-        code = code[dlen:]
-    #tokens = T
-    #en = en_gpt2.GPT2ArthmEncoder(l=16)
-    #t5 = time.perf_counter()
-    #print(f"Encoder intialization took {t5 - t4:0.4f} s")
-    #D, w = en.encode(tokens)
-    #t6 = time.perf_counter()
-    #print(f"Encoding generated sentences took {t6 - t5:0.4f} s")
-    #new_ct = bytes(D)
-
-
-    #try:
-    #    new_msg = crypto.decrypt_aes_cbc(key, iv, new_ct)
-    #except:
-    #    return (0,ct.hex(),new_ct.hex()+" w="+str(len(w)),"")
-    #if new_msg == secret_msg:
-    #    return (1, ct.hex(),eng,"")
-    #else:
-    #    return (2,ct.hex(),new_ct.hex()+" w="+str(len(w)),new_msg)
+        print(T)
+    else:
+        print(colored('Yes it can!','green'))
 
 
 

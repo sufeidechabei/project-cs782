@@ -4,9 +4,7 @@ from transformers import AutoModelForCausalLM, \
 # from torch import nn
 import numpy as np
 
-def tokenize(eng):
-    toker = AutoTokenizer.from_pretrained("gpt2")
-    model = AutoModelForCausalLM.from_pretrained("gpt2")
+def tokenize(eng, toker, model):
     inpts = toker(eng, return_tensors="pt")
     inpt_ids = inpts["input_ids"]
     tokens = []

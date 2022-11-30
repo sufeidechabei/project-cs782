@@ -11,7 +11,7 @@ import math as math
 
 class GPT2ArthmDecoder:
 
-    def __init__(self, l=4, r=8, code=None, seed="I think"):
+    def __init__(self, l=4, r=8, code=None, seed="I think", toker=None, model=None):
         self.r = r
         self.l = l
         self.w = [] # The D? No. The w
@@ -21,7 +21,7 @@ class GPT2ArthmDecoder:
         self.C = code
         self.C_cursor = l
         self.c_padding = 1
-        self.M = gpt2modellib.GPT2Model(first_phrase=seed)
+        self.M = gpt2modellib.GPT2Model(first_phrase=seed, toker=toker, model=model)
         self.seed = seed
         if code is None:
             exit(1)
@@ -92,11 +92,11 @@ class GPT2ArthmDecoder:
                 print(colored(token,'yellow'),end="",flush=True)
             else:
                 print(token,end="",flush=True)
-            if (token[0] == '.' or token[0] == '?' or token[0] == '!'):
+            if len(D) >= len(self.C) and (token[0] == '.' or token[0] == '?' or token[0] == '!'):
                 print()
                 break
             self.M.next(token)
-        return T, len(D)
+        return T
                     
 def bin32(x):
     return bin(x)[2:].zfill(32)

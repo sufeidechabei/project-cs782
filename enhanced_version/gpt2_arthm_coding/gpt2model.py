@@ -21,10 +21,10 @@ def should_ignore(token):
 class GPT2Model:
     
 
-    def __init__(self, first_phrase="I think"):
+    def __init__(self, first_phrase="I think", toker = None, model = None):
         # GPT-2 and Pytorch params
-        self.toker = AutoTokenizer.from_pretrained("gpt2")
-        self.model = AutoModelForCausalLM.from_pretrained("gpt2")
+        self.toker = toker
+        self.model = model
         # Our model specific
         self.k_value = 3000
         self.initial_seed = first_phrase
