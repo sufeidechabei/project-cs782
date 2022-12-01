@@ -88,7 +88,7 @@ class GPT2ArthmDecoder:
                     self.invert_range()
                 else:
                     D.append(symbol)
-            if len(D) >= len(self.C):
+            if len(D) > len(self.C):
                 print(colored(token,'yellow'),end="",flush=True)
             else:
                 print(token,end="",flush=True)

@@ -37,5 +37,7 @@ def extract_iv_ct(raw_bytes):
     iv = raw_bytes[:16]
     ct = raw_bytes[16:]
     extra_pads = -1 * (len(ct) % 16)
+    if extra_pads == 0:
+        return iv, ct
     real_ct = ct[:extra_pads]
     return iv, real_ct
