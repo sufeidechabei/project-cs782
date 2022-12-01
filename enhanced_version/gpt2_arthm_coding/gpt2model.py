@@ -4,6 +4,8 @@ from transformers import AutoModelForCausalLM, \
 # from torch import nn
 import numpy as np
 
+from collections import OrderedDict
+
 import time
 
 def my_normalizer(tensor_vals):
@@ -23,7 +25,8 @@ class GPT2Model:
     
 
     def __init__(self, first_phrase="I think", toker = None, model = None):
-        self.parallel_mode = 0 # 0 for original next function. 1 for the parallel next function
+        self.seed_update_mode = 1 # 0 for original, 1 for new
+        self.time_advancement = False
         # GPT-2 and Pytorch params
         self.toker = toker
         self.model = model
@@ -31,16 +34,28 @@ class GPT2Model:
         self.k_value = 3000
         self.initial_seed = first_phrase
         self.current_seed = self.initial_seed
-        self.current_token_distro = []
+        self.current_token_distro = OrderedDict()
         # Initialize to get the first token.
         self.next()
 
-    def original_next(self,token=None):
+    def update_seed_original(self, token):
+        self.current_seed = self.current_seed + token
+
+    def see_distro(self):
+        return self.current_token_distro
+
+    def update_seed_advanced(self, token):
+        self.current_seed = token
+
+    def next(self,token=None):
         # update seed if needed
         if token is not None:
-            self.current_seed = self.current_seed + token
+            if self.seed_update_mode == 0:
+                self.update_seed_original(token)
+            else:
+                self.update_seed_advanced(token)
         # start generation
-        #t0 = time.perf_counter()
+        t0 = time.perf_counter()
         inpts = self.toker(self.current_seed, return_tensors="pt")
         with torch.no_grad():
             logits = self.model(**inpts).logits[:, -1, :]
@@ -48,65 +63,54 @@ class GPT2Model:
         tensor_vals = logits.topk(self.k_value).values.tolist()[0]
         # now get the tokens list
         token_indices = logits.topk(self.k_value).indices.tolist()[0]
-        #t1 = time.perf_counter()
-        #print(f"### Obtaining topK tokens took {t1 - t0:0.4f} s")
-        #t2 = time.perf_counter()
+        t1 = time.perf_counter()
+        t2 = time.perf_counter()
         tokens_list = []
         for index in token_indices:
             tokens_list.append(self.toker.decode(index))
         # prune the ignored ones
         normalized_sum = 0
-        tmp_t = []
-        tmp_v = []
-        for i in range(0,len(tokens_list)):
-            if not should_ignore(tokens_list[i]):
-                tmp_t.append(tokens_list[i])
-                tmp_v.append(tensor_vals[i])
-        normalized_vals = my_normalizer(tmp_v)
-        tokens_list = tmp_t
+        pruned_tokens = []
+        pre_normalized_vals = []
+        for i in range(0, len(tokens_list)):
+            if (not should_ignore(tokens_list[i])) and (tokens_list[i] not in pruned_tokens):
+                pruned_tokens.append(tokens_list[i])
+                pre_normalized_vals.append(tensor_vals[i])
+        normalized_vals = my_normalizer(pre_normalized_vals)
         for v in normalized_vals:
             normalized_sum += v
         # now the probabilities
-        self.current_token_distro = []
+        assert len(normalized_vals) == len(pruned_tokens)
+        self.current_token_distro = OrderedDict()
         current_cumu = 0
-        #t3 = time.perf_counter()
-        #print(f"### Preparation for the distro generation took {t3 - t2:0.4f} s")
-        #t4 = time.perf_counter()
-        for i in range(0, len(tokens_list)):
-            token = tokens_list[i]
+        t3 = time.perf_counter()
+        t4 = time.perf_counter()
+        for i in range(0, len(pruned_tokens)):
+            token = pruned_tokens[i]
+            if (token in self.current_token_distro):
+                continue
             cumu_freq = current_cumu / normalized_sum
             rela_freq = normalized_vals[i] / normalized_sum
-            self.current_token_distro.append((token, cumu_freq, rela_freq))
+            self.current_token_distro[token] = (cumu_freq, rela_freq)
             current_cumu += normalized_vals[i]
-        #t5 = time.perf_counter()
-        #print(f"### Generation of the distro took {t5 - t4:0.4f} s\n");
-
-
-    def parallel_next(self, token=None):
-        print("WIP")
-
-
-    def next(self, token=None):
-        if self.parallel_mode == 0:
-            self.original_next(token=token)
-        else:
-            self.parallel_next(token=token)
+        t5 = time.perf_counter()
+        if (self.time_advancement):
+            print(f"\n[Timeing] Obtain={t1 - t0:0.4f}s\tPrep={t3 - t2:0.4f}s\tGen={t5 - t4:0.4f}s");
 
 
 
     def GetToken(self, freq):
+        last_freq = 0
         for distro in self.current_token_distro:
-            if distro[1] + distro[2] >= freq: # [1] is cumu, [2] is rela
-                return distro[0]
+            last_freq = self.current_token_distro[distro][0] + self.current_token_distro[distro][1]
+            if last_freq >= freq: # [0] is cumu, [0] is rela
+                return distro
+        print("\n*** Getting token with frequency = "+str(freq)+" failed????   last distro = "+str(last_freq))
 
 
     def GetFreq(self, token):
-        for distro in self.current_token_distro:
-            if distro[0] == token:
-                cumu = distro[1]
-                rela = distro[2]
-                return (cumu, rela)
-
+        bundle = self.current_token_distro[token]
+        return (bundle[0], bundle[1])
 
 
 

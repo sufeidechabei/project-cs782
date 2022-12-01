@@ -34,8 +34,17 @@ class GPT2ArthmDecoder:
         return diff1 / diff2
         
 
-    def adjust(self, token):
+    def adjust(self, token, tfreq):
         cumu, relative = self.M.GetFreq(token)
+        if cumu + relative < tfreq:
+           l = self.M.see_distro()
+           for distro in l:
+            if distro[0] == token:
+                cumu1 = distro[1]
+                rela1 = distro[2]
+                print("\n!! "+token+","+str(cumu1)+","+str(rela1))
+
+
         diff = self.b - self.a
         self.b = self.a + math.floor((cumu + relative) * diff)
         self.a = self.a + math.floor(cumu * diff)
@@ -54,9 +63,11 @@ class GPT2ArthmDecoder:
         T = []
         print(self.seed,end="",flush=True)
         while (True):
-            token = self.M.GetToken(self.target_frequency())
+            assert self.c < self.b # for future checks
+            tfreq = self.target_frequency()
+            token = self.M.GetToken(tfreq)
             T.append(token)
-            self.adjust(token)
+            self.adjust(token, tfreq)
             shift_amount = self.r*self.l - 1
             dbf_a = self.a >>  shift_amount
             dbf_b = self.b-1 >> shift_amount
@@ -68,6 +79,7 @@ class GPT2ArthmDecoder:
                 self.invert_range()
             bb = 1 << (self.r * self.l)
             break_flag = False
+            # TODO Insert timer for this part and for encoder
             while self.b - self.a <= bb >> 9: #why 9? is it self.r + 1?
                 symbol = self.a >> (self.r * self.l - self.r)
                 self.a = (self.a << self.r) % bb
