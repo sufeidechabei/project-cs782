@@ -91,6 +91,9 @@ class GPT2ArthmDecoder:
                     self.invert_range()
                 else:
                     D.append(symbol)
+
+            self.M.next(token)
+
             if len(D) > len(self.C):
                 print(colored(token,'yellow'),end="",flush=True)
             else:
@@ -98,7 +101,6 @@ class GPT2ArthmDecoder:
             if len(D) >= len(self.C) and (token[0] == '.' or token[0] == '?' or token[0] == '!'):
                 print()
                 break
-            self.M.next(token)
         return T
                     
 def bin32(x):

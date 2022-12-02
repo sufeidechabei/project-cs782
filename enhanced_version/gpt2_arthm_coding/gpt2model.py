@@ -6,6 +6,8 @@ import numpy as np
 
 from collections import OrderedDict
 
+from termcolor import colored
+
 import time
 
 def my_normalizer(tensor_vals):
@@ -15,7 +17,7 @@ def my_normalizer(tensor_vals):
     return list(np.exp(zz)/sum(np.exp(zz)))
 
 def should_ignore(token):
-    igs = ['\n','"','(',')','<|endoftext|>']
+    igs = ['\n','"','(',')','<|endoftext|>','[',']','{','}']
     for ig in igs:
         if ig in token:
             return True
@@ -25,7 +27,7 @@ class GPT2Model:
     
 
     def __init__(self, first_phrase="I think", toker = None, model = None):
-        self.seed_update_mode = 0 # 0 for original, 1 for new
+        self.seed_update_mode = 1 # 0 for original, 1 for new
         self.time_advancement = False
         # GPT-2 and Pytorch params
         self.toker = toker
@@ -35,25 +37,45 @@ class GPT2Model:
         self.initial_seed = first_phrase
         self.current_seed = self.initial_seed
         self.current_token_distro = OrderedDict()
+        # parameters for advanced seeding
+        self.seed_rotater = ["",""]
+        self.rotater_cursor = 0
         # Initialize to get the first token.
         self.next()
 
     def update_seed_original(self, token):
+        if token is None:
+            return
         self.current_seed = self.current_seed + token
 
     def see_distro(self):
         return self.current_token_distro
 
     def update_seed_advanced(self, token):
-        self.current_seed = token
+        if token is None:
+            # first iteration. assume it doesn't end with period at all.
+            self.seed_rotater[0] = self.current_seed
+        else:
+            # append to which ever we are rotating
+            self.seed_rotater[self.rotater_cursor] = self.seed_rotater[self.rotater_cursor] + token
+            if token == '.' or token == '?' or token == '!':
+                # current one in rotater is now a sentence, shift to the next one to append.
+                self.rotater_cursor += 1
+            if self.rotater_cursor >= len(self.seed_rotater):
+                # oh, we have len(rotater) sentences now. start shifting back.
+                for i in range(0, len(self.seed_rotater)-1):
+                    self.seed_rotater[i] = self.seed_rotater[i+1]
+                self.seed_rotater[-1] = ""
+                self.rotater_cursor = len(self.seed_rotater) - 1
+        self.current_seed = "".join(self.seed_rotater)
+        #print(colored("\n"+self.current_seed, "cyan"),end="",flush=True)
 
     def next(self,token=None):
         # update seed if needed
-        if token is not None:
-            if self.seed_update_mode == 0:
-                self.update_seed_original(token)
-            else:
-                self.update_seed_advanced(token)
+        if self.seed_update_mode == 0:
+            self.update_seed_original(token)
+        else:
+            self.update_seed_advanced(token)
         # start generation
         t0 = time.perf_counter()
         inpts = self.toker(self.current_seed, return_tensors="pt")

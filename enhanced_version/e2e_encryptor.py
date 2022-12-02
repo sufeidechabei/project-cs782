@@ -67,9 +67,6 @@ def run_encryption(secret_msg, my_l, initial_seed, include_iv = False):
         print(all_T)
     else:
         print(colored('Yes it can!','green'))
-        print(re_T)
-        print()
-        print(all_T)
 
 
 
