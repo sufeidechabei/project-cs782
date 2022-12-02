@@ -50,7 +50,7 @@ def produce_header(seed, ct_chunk_count):
     header_key = obtain_key("header_key")
     iv, ct = encrypt_aes_cbc(header_key, header)
     print("ecryt header is "+iv.hex()+" "+ct.hex())
-    return iv,ct
+    return iv + ct
     
 def check_header(partial_decoded, seed):
     # check if the partially_decoded text can be decrypted and has a matching partial md5 of the seed.
@@ -81,8 +81,7 @@ def check_header(partial_decoded, seed):
 if __name__ == "__main__":
     while(1):
         s = input()
-        iv,ct = produce_header(s, 17)
-        code = iv+ct
+        code = produce_header(s, 17)
         a = check_header(code, "asdasdsadasd")
         print(a)
     # Test the util module

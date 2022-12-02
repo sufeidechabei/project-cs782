@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" English-to-English(E2E) Encryption Tool """
+""" English-to-English(E2E) Encryption Tool for hiding text in the middle of an article """
 import binascii as binascii
 from termcolor import colored
 import crypto.util as crypto
@@ -26,9 +26,16 @@ def initialize_GPT2():
     model = AutoModelForCausalLM.from_pretrained("gpt2")
     return toker, model
 
+def initial_seed_check(seed):
+    p = seed[-1]
+    if p != '.' or p != '!' or p != '?':
+        print(colored("!!!! INVALID seed for this tool. It must be a sentence with . or ! or ? as the ending", red))
+        exit(1)
 
-def run_encryption(secret_msg, my_l, initial_seed, include_iv = False):
 
+def run_encryption(secret_msg, my_l, initial_seed):
+    initial_seed_check(initial_seed)
+    initial_seed = " "+initial_seed
     t0 = time.perf_counter()
     toker, model = initialize_GPT2()
     print()
@@ -41,10 +48,13 @@ def run_encryption(secret_msg, my_l, initial_seed, include_iv = False):
     print(f"AES encryption took {t2 - t1:0.4f} s")
     print("Generated ciphertext="+ct.hex()+"  iv="+iv.hex())
 
-    if include_iv:
-        code = iv+ct
-    else:
-        code = ct
+    pre_header_code = iv+cti
+    # calculate the length of actual ct and put them in the header
+    chunk_num = len(pre_header_code) / 16
+    code_header = crypto.produce_header(initial_seed, chunk_num)
+    code = code_header + pre_header_code
+ 
+
     initial_seed = util.pad(initial_seed)
     de = de_gpt2.GPT2ArthmDecoder(l=my_l, code = code, seed=initial_seed, toker=toker, model=model)
     t3 = time.perf_counter()
@@ -100,7 +110,7 @@ if __name__ == "__main__":
     print()
     msg = input("Type your secret message:")
     while(1):
-        run_encryption(msg, my_l, seed, include_iv = True)
+        run_encryption(msg, my_l, seed)
         stop = input("\nPress enter to regenerate or type anything to exit:")
         if len(stop) > 0:
             break
