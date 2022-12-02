@@ -27,7 +27,7 @@ def initialize_GPT2():
     return toker, model
 
 
-def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
+def run_encryption(secret_msg, my_l, initial_seed, include_iv = False):
 
     t0 = time.perf_counter()
     toker, model = initialize_GPT2()
@@ -45,8 +45,8 @@ def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
         code = iv+ct
     else:
         code = ct
-
-    de = de_gpt2.GPT2ArthmDecoder(l=my_l, code = code, seed=first_phrase, toker=toker, model=model)
+    initial_seed = util.pad(initial_seed)
+    de = de_gpt2.GPT2ArthmDecoder(l=my_l, code = code, seed=initial_seed, toker=toker, model=model)
     t3 = time.perf_counter()
     print(f"Arithmatic decoder intialization took {t3 - t2:0.4f} s")
     print()
@@ -54,22 +54,22 @@ def run_encryption(secret_msg, my_l, first_phrase, include_iv = False):
     T = de.decode()
     print("=========================================================================")
     t4 = time.perf_counter()
-    all_T = [first_phrase] + T
+    all_T = [initial_seed] + T
     print(f"\nDecoding the cipher text took {t4 - t3:0.4f} s")
     eng = "".join(all_T)
-    parsed_seed, re_T = util.tokenize(eng, toker, model)
+    re_T = util.tokenize(eng, toker, model)
     print()
     print("Can be uniquely Tokenized? ",end="",flush=True)
-    if (re_T != T):
+    if (re_T != all_T):
         print(colored('No! Here are there contents:', 'red'))
         print(re_T)
         print()
-        print(T)
-    elif (parsed_seed != first_phrase):
-        print(colored('No! tokens match but seeds do not match:', 'red'))
-        print("real seed = "+first_phrase+"  but parsed seed = "+parsed_seed)
+        print(all_T)
     else:
         print(colored('Yes it can!','green'))
+        print(re_T)
+        print()
+        print(all_T)
 
 
 

@@ -25,7 +25,7 @@ class GPT2Model:
     
 
     def __init__(self, first_phrase="I think", toker = None, model = None):
-        self.seed_update_mode = 1 # 0 for original, 1 for new
+        self.seed_update_mode = 0 # 0 for original, 1 for new
         self.time_advancement = False
         # GPT-2 and Pytorch params
         self.toker = toker

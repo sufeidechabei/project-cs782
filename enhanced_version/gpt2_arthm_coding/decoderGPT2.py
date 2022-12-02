@@ -52,7 +52,7 @@ class GPT2ArthmDecoder:
         """ Follow their written version and pseudo-code in blend """
         D = []
         T = []
-        print(self.seed,end="",flush=True)
+        print(self.seed[1:],end="",flush=True)
         while (True):
             assert self.c < self.b # for future checks
             tfreq = self.target_frequency()
