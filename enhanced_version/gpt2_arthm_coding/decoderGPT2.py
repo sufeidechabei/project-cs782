@@ -34,17 +34,8 @@ class GPT2ArthmDecoder:
         return diff1 / diff2
         
 
-    def adjust(self, token, tfreq):
+    def adjust(self, token):
         cumu, relative = self.M.GetFreq(token)
-        if cumu + relative < tfreq:
-           l = self.M.see_distro()
-           for distro in l:
-            if distro[0] == token:
-                cumu1 = distro[1]
-                rela1 = distro[2]
-                print("\n!! "+token+","+str(cumu1)+","+str(rela1))
-
-
         diff = self.b - self.a
         self.b = self.a + math.floor((cumu + relative) * diff)
         self.a = self.a + math.floor(cumu * diff)
@@ -67,7 +58,7 @@ class GPT2ArthmDecoder:
             tfreq = self.target_frequency()
             token = self.M.GetToken(tfreq)
             T.append(token)
-            self.adjust(token, tfreq)
+            self.adjust(token)
             shift_amount = self.r*self.l - 1
             dbf_a = self.a >>  shift_amount
             dbf_b = self.b-1 >> shift_amount
