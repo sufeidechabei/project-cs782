@@ -28,14 +28,14 @@ def initialize_GPT2():
 
 def initial_seed_check(seed):
     p = seed[-1]
-    if p != '.' or p != '!' or p != '?':
-        print(colored("!!!! INVALID seed for this tool. It must be a sentence with . or ! or ? as the ending", red))
+    if p != '.' and p != '!' and p != '?':
+        print(colored("!!!! INVALID seed for this tool. It must be a sentence with . or ! or ? as the ending", 'red'))
         exit(1)
 
 
 def run_encryption(secret_msg, my_l, initial_seed):
     initial_seed_check(initial_seed)
-    initial_seed = " "+initial_seed
+    initial_seed = util.pad(initial_seed)
     t0 = time.perf_counter()
     toker, model = initialize_GPT2()
     print()
@@ -48,14 +48,15 @@ def run_encryption(secret_msg, my_l, initial_seed):
     print(f"AES encryption took {t2 - t1:0.4f} s")
     print("Generated ciphertext="+ct.hex()+"  iv="+iv.hex())
 
-    pre_header_code = iv+cti
+    pre_header_code = iv+ct
     # calculate the length of actual ct and put them in the header
-    chunk_num = len(pre_header_code) / 16
+    assert len(pre_header_code) % 16 == 0
+    chunk_num = len(pre_header_code) // 16
+    print("??? = "+str(chunk_num))
     code_header = crypto.produce_header(initial_seed, chunk_num)
     code = code_header + pre_header_code
  
 
-    initial_seed = util.pad(initial_seed)
     de = de_gpt2.GPT2ArthmDecoder(l=my_l, code = code, seed=initial_seed, toker=toker, model=model)
     t3 = time.perf_counter()
     print(f"Arithmatic decoder intialization took {t3 - t2:0.4f} s")
@@ -68,13 +69,14 @@ def run_encryption(secret_msg, my_l, initial_seed):
     print(f"\nDecoding the cipher text took {t4 - t3:0.4f} s")
     eng = "".join(all_T)
     re_T = util.tokenize(eng, toker, model)
+    all_T_2 = util.tokenize(initial_seed, toker, model) + T
     print()
     print("Can be uniquely Tokenized? ",end="",flush=True)
-    if (re_T != all_T):
+    if (re_T != all_T_2):
         print(colored('No! Here are there contents:', 'red'))
         print(re_T)
         print()
-        print(all_T)
+        print(all_T_2)
     else:
         print(colored('Yes it can!','green'))
 
@@ -102,11 +104,10 @@ if __name__ == "__main__":
         if curarg == "-a":
             add_iv = True
     if seed is None:
-        seed = util.sample_seed()
-        rand_seed = True
-        print("No first word provided. Randomly using one of ours.")
+        print("No first sentence provided! Exiting......")
+        exit(1)
     print("coding range= "+str(my_l))
-    print("first  word = "+seed)
+    print("first  sentence = "+seed)
     print()
     msg = input("Type your secret message:")
     while(1):

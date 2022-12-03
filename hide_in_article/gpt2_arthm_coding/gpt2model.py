@@ -56,7 +56,7 @@ class GPT2Model:
             # first iteration. for hide in article, current seed must end in period.
             # following up seeds must append to the next array
             self.seed_rotater[0] = self.current_seed
-            self.seed_rotater_cursor += 1
+            self.rotater_cursor += 1
         else:
             # append to which ever we are rotating
             self.seed_rotater[self.rotater_cursor] = self.seed_rotater[self.rotater_cursor] + token

@@ -4,6 +4,8 @@ from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 from Crypto.Util.Padding import pad, unpad
 
+from termcolor import colored
+
 import os
 import hashlib
 
@@ -44,13 +46,14 @@ def get_md5(text):
 def produce_header(seed, ct_chunk_count):
     # produce a header base on the initial seed and the length of the cipher text
     md5hash = get_md5(seed)
-    print(md5hash)
-    header = md5hash[:13] + hex(ct_chunk_count)[2:]
-    print("plain header is "+header+"  len = "+str(len(header)))
+    header = md5hash[:13] + hex(ct_chunk_count)[2:].zfill(2)
+    print("produced header bytes: "+header)
     header_key = obtain_key("header_key")
     iv, ct = encrypt_aes_cbc(header_key, header)
-    print("ecryt header is "+iv.hex()+" "+ct.hex())
-    return iv + ct
+    e_header = iv + ct
+    print("encrypted header data: "+e_header.hex())
+    print()
+    return e_header
     
 def check_header(partial_decoded, seed):
     # check if the partially_decoded text can be decrypted and has a matching partial md5 of the seed.
@@ -58,20 +61,22 @@ def check_header(partial_decoded, seed):
     iv = partial_decoded[:16]
     ct = partial_decoded[16:]
     if len(iv) + len(ct) != len(partial_decoded):
-        print("!!! Length mismatch")
+        print(colored("!!! Length mismatch", "red"))
         return None
     header_key = obtain_key("header_key")
     try:
         header = decrypt_aes_cbc(header_key, iv, ct)
     except:
-        print("Header cannot be decrypted")
+        print(colored("header cannot be decrypted", "red"))
+        #print(partial_decoded.hex())
         return None
     new_md5 = get_md5(seed)
     if (header[:13] == new_md5[:13]):
         chunk_count_hex = header[-2:]
-        print(chunk_count_hex)
+        print(colored("header is confirmed! chunk size = 0x"+chunk_count_hex, "green"))
         return int(chunk_count_hex, 16)
     else:
+        print(colored("header is decrypted, but it mismatches", "red"))
         return None
 
 

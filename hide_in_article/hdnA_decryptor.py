@@ -8,6 +8,8 @@ import gpt2_arthm_coding.decoderGPT2 as de_gpt2
 
 import e2e_util as util
 
+from termcolor import colored
+
 import time
 
 import getopt
@@ -35,15 +37,47 @@ def run_decryption(eng, my_l, given_iv=None):
     t4 = time.perf_counter()
     eng = util.pad(eng)
     all_tokens = util.tokenize(eng, toker, model)
-    print("Tokens = "+str(all_tokens))
+    print("Parsed out "+str(len(all_tokens))+" Tokens")
 
-    en = en_gpt2.GPT2ArthmEncoder(l=my_l, seed=all_tokens[0], toker=toker, model=model)
+    #Try to find the header
+    seed_candidate_tokens = []
+    seed_candidate = ""
+    remaining_tokens = []
+    chunk_num = None
+    print("\n\n____________________  Step 1: header searching  ____________________")
+    for index in range(0, len(all_tokens)):
+         t = all_tokens[index]
+         seed_candidate_tokens.append(t)
+         if t == "." or t == "?" or t == "!":
+             # we now have a seed candidate
+             seed_candidate = "".join(seed_candidate_tokens)
+             print("\nseed candidate = '"+seed_candidate+"'")
+             if not (index + 1 < len(all_tokens)):
+                 print("Exahusted!! Aborting")
+                 exit(1)
+             remaining_tokens =  all_tokens[index+1:]
+             try:
+                extracted_header_bytes = en_gpt2.GPT2ArthmEncoder.encode_partial(my_l, remaining_tokens, seed_candidate, toker, model)
+             except:
+                 print("] ",end="")
+                 print(colored("header cannot be extracted","red"))
+                 seed_candidate_tokens = []
+                 continue
+             chunk_num = crypto.check_header(bytes(extracted_header_bytes), seed_candidate)
+             if chunk_num is not None:
+                 break;
+             else:
+                 seed_candidate_tokens = []
+             
+    en = en_gpt2.GPT2ArthmEncoder(l=my_l, seed=seed_candidate, toker=toker, model=model)
     t5 = time.perf_counter()
-    print(f"\nParsing & Encoder intialization took {t5 - t4:0.4f} s")
-    D, w = en.encode(all_tokens[1:])
+    print(f"\nIntialization and searching took {t5 - t4:0.4f} s")
+    print("\n\n____________________ Step 2: decrypt the secret  __________________")
+    D, _ = en.encode(remaining_tokens, 32 + chunk_num * 16)
+    D_ct = D[32:]
     t6 = time.perf_counter()
     print(f"Encoding generated sentences took {t6 - t5:0.4f} s")
-    new_encoded = bytes(D)
+    new_encoded = bytes(D_ct)
     new_iv, new_ct = util.extract_iv_ct(new_encoded) 
     key = crypto.obtain_key("e2e")
     success = False

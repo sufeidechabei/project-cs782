@@ -29,13 +29,65 @@ class GPT2ArthmEncoder:
         self.a = self.a ^ mask
         self.b = self.b ^ mask
 
+    def encode_partial(my_l, token_list, seed, toker, model):
+        """ (no self) encode only to 32 bytes for header checks Use a separate model instance so that we don't harm the rest"""
+        localM = gpt2modellib.GPT2Model(first_phrase=seed, toker=toker, model=model)
+        D = []
+        r = 8
+        l = my_l
+        w = []
+        a = 0
+        b = 1 << (r*l)
+        magic_num = 0x80
+        print("Partial Encoding [",end="",flush=True)
+        for token in token_list:
+            print("=",end="",flush=True)
+            #adjust locally
+            cumu, relative = localM.GetFreq(token)
+            b_a = b - a
+            b = a + math.floor((cumu + relative) * b_a)
+            a = a + math.floor(cumu * b_a)
 
-    def encode(self, token_list):
+            dbf_a = a >> r*l-1
+            dbf_b = b - 1 >> r*l-1
+            if len(w) > 0 and dbf_a == dbf_b:
+                D.append(w[0] + dbf_a)
+                for n in w[1:]:
+                    D.append(n + dbf_a ^ magic_num)
+                w = []
+                #invert range
+                mask = 1 << l * r - 1
+                a = a ^ mask
+                b = b ^ mask
+            bb = 1 << r * l
+            while b - a <= bb >> 9: #why 9? is it self.r + 1?
+                symbol = (a % bb) >> (r * l - r)
+                a = (a << r) % bb
+                b = (b << r) % bb
+                if b == 0:
+                    b = bb
+                if a > b:
+                    w.append(symbol)
+                    # invert range:
+                    mask = 1 << l * r - 1
+                    a = a ^ mask
+                    b = b ^ mask
+                else:
+                    D.append(symbol)
+            if len(D) >= 32:
+                break
+            localM.next(token)
+        print("] extracted "+str(len(D))+" bytes --> ",end="")
+        return D[:32]
+
+
+
+    def encode(self, token_list, target_D_length):
         """ Follow their written version and pseudo-code in blend """
         D = []
-        print("\nEncoding",end="",flush=True)
+        print("\nEncoding [",end="",flush=True)
         for token in token_list:
-            print(".",end="",flush=True)
+            print("=",end="",flush=True)
             self.adjust(token)
             dbf_a = self.a >> self.r*self.l-1
             dbf_b = self.b - 1 >> self.r*self.l-1
@@ -57,10 +109,12 @@ class GPT2ArthmEncoder:
                     self.invert_range()
                 else:
                     D.append(symbol)
+            if len(D) >= target_D_length:
+                break
             self.M.next(token)
+        print("]")
         print()
-        print()
-        return D, self.w
+        return D[:target_D_length], self.w
                     
 def bin32(x):
     return bin(x)[2:].zfill(32)
