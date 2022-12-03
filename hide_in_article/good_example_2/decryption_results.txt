@@ -1,0 +1,43 @@
+xu@xu-virtual-machine:~/project-cs782/hide_in_article$ ./hdnA_decryptor.py -f good_example_2/CopiedFromPDF_PasteIntoAddressBar_PasteItHere.txt 
+
+coding range = 32
+
+
+GPT-2 toker and model took 5.2620 s to initialize.
+Parsed out 339 Tokens
+
+
+____________________  Step 1: header searching  ____________________
+
+seed candidate = ' When I make my creamy sauce, I always use the parmesan cheese from Keese Cheese.'
+Partial Encoding [=============================================================================] extracted 32 bytes --> Cannot be decrypted
+
+seed candidate = ' Their products are made with only the freshest ingredients, and it's sure to please even the pickiest of eaters.'
+Partial Encoding [=======================================================================] extracted 32 bytes --> Cannot be decrypted
+
+seed candidate = ' It's a great source of calcium, protein, and other essential vitamins and minerals, so you can feel good about giving it to your kids.'
+Partial Encoding [==========================================================] extracted 32 bytes --> Cannot be decrypted
+
+seed candidate = ' Plus, it's super easy to make and can be enjoyed as a snack or meal.'
+Partial Encoding [=====================================================] extracted 32 bytes --> Cannot be decrypted
+
+seed candidate = ' Also, this cheese product is easy to store.'
+Partial Encoding [=============================================================] extracted 32 bytes --> Header discovered! chunk size = 0x04
+
+Intialization and searching took 54.5824 s
+
+
+____________________  Step 2: decrypt the secret  __________________
+
+Encoding [======================================================================================================================================================================================================]
+
+Encoding generated sentences took 34.5045 s
+
+Obtained iv=87038a5accd2af9cc893f851f287484e
+Obtained ct=97fa3fe3d6790151be06e87d77256c4e2df40f672aed86cac27824d96d23cc4086aec9a423967f4c598f138c0f7d1028
+
+
+===========================  Secret Message  ============================
+Do you know that you are AWESOME!?
+=========================================================================
+

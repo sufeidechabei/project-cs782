@@ -38,7 +38,7 @@ class GPT2Model:
         self.current_seed = self.initial_seed
         self.current_token_distro = OrderedDict()
         # parameters for advanced seeding
-        self.seed_rotater = ["",""]
+        self.seed_rotater = ["","","",""]
         self.rotater_cursor = 0
         # Initialize to get the first token.
         self.next()

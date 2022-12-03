@@ -1,0 +1,50 @@
+xu@xu-virtual-machine:~/project-cs782/hide_in_article$ ./hdnA_encryptor.py -s "Also, eating cheese is good for your health." -f test4.txt
+
+coding range= 32
+first  sentence = Also, eating cheese is good for your health.
+
+Type your secret message:docs.google.com/spreadsheets/d/1cw1k9N7ZDCtwzz_oLc03Ked7MvDk1QTf1STOM9i22Vg/edit#gid=1934229570
+
+GPT-2 toker and model took 11.4840 s to initialize.
+Start encryption for 'docs.google.com/spreadsheets/d/1cw1k9N7ZDCtwzz_oLc03Ked7MvDk1QTf1STOM9i22Vg/edit#gid=1934229570'
+
+AES encryption took 0.0004 s
+Generated ciphertext=5687c3f7651c49608d72002ccdf080690f45002cdde3f25c691294d56f62c422862e8b82790312e3f41dd2b60271c69d6413bd7f1c6c2f0f419f1249434e4a0ef6e71e5b627566122a8a9778274e3fc3d6122c79e6f71ad675dd2f6ae447977a  iv=bc2f37a4204a1dbbb0ba1fd7081c9a4d
+
+produced header bytes: 15552ca350eae07
+encrypted header data: ec033f54f3d65b40007203f903eae46c5628a206a86664ed5541dd9e84e11d16
+
+Arithmatic decoder intialization took 0.1624 s
+
+===================== Generated English Sentence ========================
+Also, eating cheese is good for your health. Could this make you a bad dieter? Carpal tunnel syndrome or it's cancer? More scientifically proven by studies are better diet to improve your gut and prevent it from destruction. Reduce weight of many foods Get more evidence of Knee Myli Kinklage Clear Skin Repair Kettle Chips Milk Soda Ylang Ylang Ylang Forget one thing and kick yourself to sleep. Clean up your body's calories on a daily basis in this book. Use low-carb, low-fat low-protein and low-^Ccarb=========================================================================
+
+Decoding the cipher text took 20.5470 s
+
+Can be uniquely Tokenized? Yes it can!
+Saved generated sentence to test4.txt
+
+Press enter to regenerate or type anything to exit:
+
+GPT-2 toker and model took 6.0884 s to initialize.
+Start encryption for 'docs.google.com/spreadsheets/d/1cw1k9N7ZDCtwzz_oLc03Ked7MvDk1QTf1STOM9i22Vg/edit#gid=1934229570'
+
+AES encryption took 0.0004 s
+Generated ciphertext=30b7eb471de2644627e6ce1a25a75c80fb3cc4d6709ec5ca7caf982d65480221436391f0ae7534859266ddfcf7575979c608006d6f816407801bb7e884dcaf1d9147f01af148314921545a361a2502759458076f5927ec85c2a8ef706e14f894  iv=3ed7ce22b1eb16131cc8f87c45f1dd95
+
+produced header bytes: 15552ca350eae07
+encrypted header data: 0d33204bca2aaeb529785b17cd741fdc28d8691d48c3b1cb98ecf3130e0e1bf8
+
+Arithmatic decoder intialization took 0.1310 s
+
+===================== Generated English Sentence ========================
+Also, eating cheese is good for your health. It helps to be on the compatible list of fats. Fats that can be used in your diet can be useful, including avocado, nuts and seeds. If you're interested in introducing yogurt or a variety of fruits over this, play around. Your body will adapt to it quite rapidly and reduce its natural rate of growth. Besides, just five or ten years ago, most white breads containing lactose content were considered unhealthy, until they became closely restricted: red, raw or what have you. However, from pictures of exerits of this product, nutritionist Rick Peeves argues, yogurt is actually something you probably get from eating fish or pastries: The top of a white bread contains far too much protein, and for good reason: These cheese breads stink. If you want to not indulge in any of the vegetable flavored lead, you'll likely instantaneously drown in the byproducts of any dairy byproducts, like olive oil. Have a look... If you create 50 different types of human-made lactose-containing dairy-free, vegan old-fashioned way of making yogurt, you'll soon discover that you're about as efficient as my predecessor, Jim Heath.
+=========================================================================
+
+Decoding the cipher text took 63.9319 s
+
+Can be uniquely Tokenized? Yes it can!
+Saved generated sentence to test4.txt
+
+Press enter to regenerate or type anything to exit:
+

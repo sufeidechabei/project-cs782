@@ -1,0 +1,29 @@
+xu@xu-virtual-machine:~/project-cs782/hide_in_article$ ./hdnA_encryptor.py -s "However, I think privacy is not really important." -f test3.txt
+
+coding range= 32
+first  sentence = However, I think privacy is not really important.
+
+Type your secret message:I am working on the grades, and they are not final. I did not intend to publish it now, but you know, Canvas! :shrug: / :facepalm: emoji.
+
+GPT-2 toker and model took 5.3329 s to initialize.
+Start encryption for 'I am working on the grades, and they are not final. I did not intend to publish it now, but you know, Canvas! :shrug: / :facepalm: emoji.'
+
+AES encryption took 0.0002 s
+Generated ciphertext=d2caba881b8353c5ab8ae562da3e61e0a97d01e2d6a7a0475c143185f017de654d4278ee4bb21237a1c849c4b36064ff1e6c08961900993b040b577dcc18f212da6a98513123eb295ae6dd7ed0edcf0bc02d778a55c9a84cc822434cb2870b2a36ec2ad34eb95c4d1142d6ad27a62bd41b97be6430f85f61ca7bdef49d17acb7fd7779d29db1403891b4c59537643837  iv=5658b5e7c50d2471429e44679e226c7b
+??? = 10
+produced header bytes: 643b7ede9756b0a
+encrypted header data: 06e14f1534ac78e5229a1821affeaf8725eebd8e6358c2292bfc1242c40c850b
+
+Arithmatic decoder intialization took 0.1190 s
+
+===================== Generated English Sentence ========================
+However, I think privacy is not really important. I don't think it's even important at the moment. It's important to distance ourselves from a sexually violent society, I think. And in order to do that, I think it's important to think of how many women we've physically attacked. It's important to think of how many people we've injured. And I think it's also important to think about how many children we've killed and how many kids we've upset, whether it's by the way we hide or because we don't know who to give them over to, or if they'll just give up. I believe that if natural disasters are a function of wars as a whole, in a single decade, we've shown even more there's still a way, and a powerful legal responsibility, to limit wars. Whether that will go far enough and be will be shown in public and our courts and the military judgments side by side. Part of answering that will be to give hope to the economy and to most importantly, to encourage American businesses to do business in fields such as agriculture, tourism and energy. Over time, as the country places a greater emphasis on jobs in agriculture, they will create relatively higher wages or jobs rates for American workers, which solidify our economic future in the central business environment. Also, allowing President Trump to dismantle two expensive, bipartisan bargaining models that Obama and Schumer have tried to shatter on business was a welcome step in the right direction over the past year. While the battle in the House is now over, the fight in the Senate is not over. Over at USA Today, Sheldon Whitehouse – head of the leadership campaign for Senate Democrats NYSDATAMIC VS. ENLISTED – reports from the battle over partisanship in the White House as the beginning of the next phase of fast-changing politics in Washington, DC… Why Democrats Win the War in Washington, DC – A Brief History of the Democratic Party in America from 1967 onward.
+=========================================================================
+
+Decoding the cipher text took 81.3495 s
+
+Can be uniquely Tokenized? Yes it can!
+Saved generated sentence to test3.txt
+
+Press enter to regenerate or type anything to exit:l
+

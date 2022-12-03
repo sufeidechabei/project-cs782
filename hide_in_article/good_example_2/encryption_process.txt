@@ -1,0 +1,158 @@
+xu@xu-virtual-machine:~/project-cs782/hide_in_article$ ./hdnA_encryptor.py -s "Also, this cheese product is easy to store." -f test5.txt
+
+coding range= 32
+first  sentence = Also, this cheese product is easy to store.
+
+Type your secret message:Do you know that you are AWESOME!?     
+
+GPT-2 toker and model took 5.6749 s to initialize.
+Start encryption for 'Do you know that you are AWESOME!?'
+
+AES encryption took 0.0005 s
+Generated ciphertext=d73ae14d6d90c5d23d02fad6499b01464be341cdde1e53b7f318525fb1b6770462a51fbe7f122562d754054d41867163  iv=d44b33394aae3d183301b9e41ad2f391
+
+produced header bytes: f1459bb09d92104
+encrypted header data: 33888836f8210b5415eb56230aec3c7f558a570e3a5aec1a3c777b6b4d618c9c
+
+Arithmatic decoder intialization took 0.1196 s
+
+===================== Generated English Sentence ========================
+Also, this cheese product is easy to store. I've been messing around with a half cup cheese can, and I think it works great on the savory section. I personally like the sides of the can, especially the cookies. So, as for the gravy? That default is to make the gravy because one of my fave sandwiches is not as authentic even in my own country as it matters. Just think about it the way these guys say it. We get barbecue is about the same as McDonald's, and if two guys bang it on the grill, Stephen, you are not signing your pieces. That's what they say. The concussions have been largely reduced. They're starting and they are going see what drags them down eventually. You can be cruel as hell and go to war or you could get punched in the face again.
+=========================================================================
+
+Decoding the cipher text took 26.9780 s
+
+Can be uniquely Tokenized? Yes it can!
+Saved generated sentence to test5.txt
+
+Press enter to regenerate or type anything to exit:
+
+GPT-2 toker and model took 5.1419 s to initialize.
+Start encryption for 'Do you know that you are AWESOME!?'
+
+AES encryption took 0.0002 s
+Generated ciphertext=04518dea986fca05232a336b04e52eabd32279d0441a74078a3c321283ec0843b1c64219515d2a004ae3ec1f88a00538  iv=ed430bb6e9ffe290c32d31547efa3d13
+
+produced header bytes: f1459bb09d92104
+encrypted header data: 72d72e1291ead4637067e9603eaed9c6d41334a63fdab7d486c4857a299cca7a
+
+Arithmatic decoder intialization took 0.1153 s
+
+===================== Generated English Sentence ========================
+Also, this cheese product is easy to store. We have five of our creams which ones can be rotayed to and refrigerated overnight. We have enough refrigerated Parmesan for 2 and an aioli to put it out one hour before recipe test. We used instant Parmesan to ensure our tamarind paste is always the same. The tamarind paste that is prepared after cooking rolls to make your own tamarind paste depends on the sliced cream, the crunchy crust, and the color of the paste. To make your first it's best to start with what you find in the microwave. They may even make your second it's more convenient to mix the savory chunks up into the top crust with your yardstick. The end results have been mysteriously announced time and time again. Choose the steps you like, whisk over the flavors after they've become clear.
+=========================================================================
+
+Decoding the cipher text took 32.3567 s
+
+Can be uniquely Tokenized? Yes it can!
+Saved generated sentence to test5.txt
+
+Press enter to regenerate or type anything to exit:
+
+GPT-2 toker and model took 5.2540 s to initialize.
+Start encryption for 'Do you know that you are AWESOME!?'
+
+AES encryption took 0.0003 s
+Generated ciphertext=393dd82593ab2ab4d04fc3d0e4127c7c71acc3213825393776bbb02088cff4a096fdf81e123c1b6d59526c1b0eb8f4eb  iv=bef36a32bbe1a3c8c984c08afb1579b0
+
+produced header bytes: f1459bb09d92104
+encrypted header data: 174bc2b0c2e381a027d416dfdece4e38afce60565e4be38569a5b42479855093
+
+Arithmatic decoder intialization took 0.1142 s
+
+===================== Generated English Sentence ========================
+Also, this cheese product is easy to store. It has been discontinued. Solution: To prevent contact irritation, dump an ingredient into the yogurt and allow it to sit on the cooker one at a time. Put it^C in=========================================================================
+
+Decoding the cipher text took 4.7763 s
+
+Can be uniquely Tokenized? Yes it can!
+Saved generated sentence to test5.txt
+
+Press enter to regenerate or type anything to exit:
+
+GPT-2 toker and model took 4.9485 s to initialize.
+Start encryption for 'Do you know that you are AWESOME!?'
+
+AES encryption took 0.0002 s
+Generated ciphertext=972adf274db10889c90bd102e0e2691182c7376061d17245c854183f685bb6c6297927cdb17ee1355b63c37da169988d  iv=1564d1dd37d1d39efb2502e0cd9ad9f4
+
+produced header bytes: f1459bb09d92104
+encrypted header data: 23761fcf3c2a3294b7386b79c7b384d045332f50bf1820e38e048f77f9ce0dc5
+
+Arithmatic decoder intialization took 0.1251 s
+
+===================== Generated English Sentence ========================
+Also, this cheese product is easy to store. It contains essential oils and certain vitamins. Therefore leaving it in the fridge is very practical. It helps prevent an ailment from occurring. This is a bit hard to do when your face is covered in age-old skin and dry-outs - so there's much room for improvement. It's possible to use a drink as there's always a fluid present. Dispose of possibly contaminated alcohol immediately before drinking or injecting. Cigarettes, cigars and crackers are actually very common diuretics on the scene. This can reduce the risk of an overdose and we encourage people to DIY it^C more=========================================================================
+
+Decoding the cipher text took 19.7453 s
+
+Can be uniquely Tokenized? Yes it can!
+Saved generated sentence to test5.txt
+
+Press enter to regenerate or type anything to exit:
+
+GPT-2 toker and model took 5.0455 s to initialize.
+Start encryption for 'Do you know that you are AWESOME!?'
+
+AES encryption took 0.0002 s
+Generated ciphertext=97a72b29963b4194e2b35d58e685c33ff7ad6cba302ee23d9919875ab36ee43abe7dc07bf8308cffe53a5a8300864fc8  iv=5b39c7c0c06c81975f6cc0fd220d60dd
+
+produced header bytes: f1459bb09d92104
+encrypted header data: 32a5a2e2b51d45d6ea45eb5bff8a3848944ce0071fb78e8cd46e20df013f4f28
+
+Arithmatic decoder intialization took 0.1367 s
+
+===================== Generated English Sentence ========================
+Also, this cheese product is easy to store. I used that along with a couple other cheeses and this is what I used. I did find that because my butter isn't very thin when wrapped, I pushed my freezer down more. I have to chain kept the cheeses on a schedule to have such extra hours. Overall, I would rate it 4 or 5 stars. All in all, I'd eat this. If left heavy on black lentils, they will retain the delicious consistency I found with other greens. If you get worried about over embellishing some of the process posts said you can add more. Both course burned nicely. Yellow Sum. Great course of exercise. How great you roasted. First damage was first exposed.
+=========================================================================
+
+Decoding the cipher text took 22.2062 s
+
+Can be uniquely Tokenized? Yes it can!
+Saved generated sentence to test5.txt
+
+Press enter to regenerate or type anything to exit:
+
+GPT-2 toker and model took 4.9743 s to initialize.
+Start encryption for 'Do you know that you are AWESOME!?'
+
+AES encryption took 0.0002 s
+Generated ciphertext=dda0bfaab8452af18727d8cd491cc5eb60234b8291de739d0428016794c3b37a9f7a7d6f64ea2a2dddd0dd6813b08ca4  iv=fb5db31ea67bafa21d97e8841093d60e
+
+produced header bytes: f1459bb09d92104
+encrypted header data: 159d2ab18978be072b6be8cdc4626432c380b024b2548f72c3a9f62ff1f7b29c
+
+Arithmatic decoder intialization took 0.1291 s
+
+===================== Generated English Sentence ========================
+Also, this cheese product is easy to store. It has a nice flavor to it and the added energy makes your mushroom salads taste amazing. The chocolate drink set it apart and makes all the difference it deserves. - Amanda Schneichelberger on 5/3/2009 10:15:02 AM Absolutely have some grill-side nachos, menu has lots. I think the mmmmmmmthouse line hit on it as well. The Potato Roll seems to be the best lukewarm n^Cach=========================================================================
+
+Decoding the cipher text took 15.8160 s
+
+Can be uniquely Tokenized? Yes it can!
+Saved generated sentence to test5.txt
+
+Press enter to regenerate or type anything to exit:
+
+GPT-2 toker and model took 4.9815 s to initialize.
+Start encryption for 'Do you know that you are AWESOME!?'
+
+AES encryption took 0.0002 s
+Generated ciphertext=97fa3fe3d6790151be06e87d77256c4e2df40f672aed86cac27824d96d23cc4086aec9a423967f4c598f138c0f7d1028  iv=87038a5accd2af9cc893f851f287484e
+
+produced header bytes: f1459bb09d92104
+encrypted header data: ff094b3eabdc1ec5f6f589e9e5ec9ec839cb10b885d6d0c396cc03dba6254168
+
+Arithmatic decoder intialization took 0.1164 s
+
+===================== Generated English Sentence ========================
+Also, this cheese product is easy to store. Soups or Mummy Snacks may be substituted for grinded mushrooms or mummies to make this creamy sauce easier to maintain. Yield: 6-12 servings Ingredients 2 Tablespoons Lemon Crust Salt, 4 Tablespoons Parmesan Cheese, 1 1/2 Tablespoons Machine Wash Egg Yolk Instructions Preheat oven to high and line a baking sheet with foil. In a large bowl, whisk together cream and extra virgin olive oil. In a medium electric mixer, beat together yogurt, sugar and allspice. Add in the ingredients you want and beat to blend but don't let it get too soft. Continue to beat on low speed for 5 minutes, until combined. Pour in the yogurt. Beat on high speed. Stir in the dry bread flour. Mix to combine. Pull out the edges and run large oval jars through your tensioners for a layer of gentle sticky bread. Don't over heat the covered jars. Enjoy. It will help you decide which side of the experiment will leave the tiver.
+=========================================================================
+
+Decoding the cipher text took 36.2753 s
+
+Can be uniquely Tokenized? Yes it can!
+Saved generated sentence to test5.txt
+
+Press enter to regenerate or type anything to exit:
+

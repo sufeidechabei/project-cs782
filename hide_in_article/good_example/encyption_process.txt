@@ -1,0 +1,29 @@
+xu@xu-virtual-machine:~/project-cs782/hide_in_article$ ./hdnA_encryptor.py -s "Also, this cheese product is easy to store." -f test4.txt
+
+coding range= 32
+first  sentence = Also, this cheese product is easy to store.
+
+Type your secret message:docs.google.com/spreadsheets/d/1cw1k9N7ZDCtwzz_oLc03Ked7MvDk1QTf1STOM9i22Vg/edit#gid=1934229570
+
+GPT-2 toker and model took 5.1845 s to initialize.
+Start encryption for 'docs.google.com/spreadsheets/d/1cw1k9N7ZDCtwzz_oLc03Ked7MvDk1QTf1STOM9i22Vg/edit#gid=1934229570'
+
+AES encryption took 0.0004 s
+Generated ciphertext=0cd539aa407016afed508ad88ebb4ea6c08116cafadcd2412475ab7c2ec3e3a48e28cb0e52438fc8e29731bb4d22b4b7b9f495d2fc63cf16b94cd5e9250b093c56d8ec4a3beb9a52d0e51b72e567501b43499f9b71dee9d592c9eca09bc3c2a7  iv=ebbd729e899b6de34419cf6258bb08a9
+
+produced header bytes: f1459bb09d92107
+encrypted header data: f1b1be2dc2723e4e6bc196a56da616bfc1994692495b80da40fbed2fa92bc50f
+
+Arithmatic decoder intialization took 0.1151 s
+
+===================== Generated English Sentence ========================
+Also, this cheese product is easy to store. Replacing a container of over-ripe cheese can be over the effort and time of regular open jars of it. Once you've got it cut out, you can enjoy it immediately within the Fresh Pioneer regime. This cheese is also very good after age is over so it will put your teeth into a jar which can enjoy it for ages to come. For those curious about my rendition of re-alimenting, here's what I try: Lay out the seeds which form a tuft in front of your cheese with your fingers. Sprinkle the seeds on top of the top and on your cheese Press up so that the seeds form. Then press down so your cheese hits your fingers. Once you've had a perfect paste, press it into the table. Bake for 5 minutes in preheated oven. Once the sauce has cooled, leave it on a wire rack for 5 minutes to let some of the crumble take care of. Enjoy!! After you've had this paste done and sprinkled an additional tablespoon of cocoa butter into that, add the vanilla and onions and sprinkle it on the top. Here comes the next trick, whipping the pan around for 30 seconds until the butter starts to crumble and you're done. Back Cook and top with chocolate chips. Cut the eggs in half, and lines a 9x13 inch pan with parchment paper, cut and cover.
+=========================================================================
+
+Decoding the cipher text took 54.1901 s
+
+Can be uniquely Tokenized? Yes it can!
+Saved generated sentence to test4.txt
+
+Press enter to regenerate or type anything to exit:l
+

@@ -61,22 +61,22 @@ def check_header(partial_decoded, seed):
     iv = partial_decoded[:16]
     ct = partial_decoded[16:]
     if len(iv) + len(ct) != len(partial_decoded):
-        print(colored("!!! Length mismatch", "red"))
+        print(colored("Mismatch in length", "red"))
         return None
     header_key = obtain_key("header_key")
     try:
         header = decrypt_aes_cbc(header_key, iv, ct)
     except:
-        print(colored("header cannot be decrypted", "red"))
+        print(colored("Cannot be decrypted", "red"))
         #print(partial_decoded.hex())
         return None
     new_md5 = get_md5(seed)
     if (header[:13] == new_md5[:13]):
         chunk_count_hex = header[-2:]
-        print(colored("header is confirmed! chunk size = 0x"+chunk_count_hex, "green"))
+        print(colored("Header discovered! chunk size = 0x"+chunk_count_hex, "green"))
         return int(chunk_count_hex, 16)
     else:
-        print(colored("header is decrypted, but it mismatches", "red"))
+        print(colored("Mismatch in content", "red"))
         return None
 
 

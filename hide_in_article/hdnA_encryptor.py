@@ -21,6 +21,7 @@ from transformers import AutoModelForCausalLM, \
 from datetime import datetime
 
 
+
 def initialize_GPT2():
     toker = AutoTokenizer.from_pretrained("gpt2")
     model = AutoModelForCausalLM.from_pretrained("gpt2")
@@ -52,7 +53,7 @@ def run_encryption(secret_msg, my_l, initial_seed):
     # calculate the length of actual ct and put them in the header
     assert len(pre_header_code) % 16 == 0
     chunk_num = len(pre_header_code) // 16
-    print("??? = "+str(chunk_num))
+    print()
     code_header = crypto.produce_header(initial_seed, chunk_num)
     code = code_header + pre_header_code
  
@@ -79,6 +80,7 @@ def run_encryption(secret_msg, my_l, initial_seed):
         print(all_T_2)
     else:
         print(colored('Yes it can!','green'))
+    return eng[1:]
 
 
 
@@ -87,22 +89,22 @@ def run_encryption(secret_msg, my_l, initial_seed):
 if __name__ == "__main__":
     arglist = sys.argv[1:]
     if len(arglist) == 0:
-        print("To be more specified, run ./e2e_encryptor.py -l [coding range (32 as default)] -s [first word]")
+        print("To be more specified, run ./hdnA_encryptor.py -l [coding range (32 as default)] -s [first full sentence] -f [file to save the output]")
     print()
-    options="l:s:a"
+    options="f:l:s:a"
     long_options=["range","seed","iv"]
     arguments, values = getopt.getopt(arglist, options, long_options)
-    add_iv = False
     seed = None
     rand_seed = False
     my_l = 32
+    file_loc = None
     for curarg, curval in arguments:
         if curarg == "-l":
             my_l = int(curval)
         if curarg == "-s":
             seed = curval
-        if curarg == "-a":
-            add_iv = True
+        if curarg == "-f":
+            file_loc = curval
     if seed is None:
         print("No first sentence provided! Exiting......")
         exit(1)
@@ -111,7 +113,11 @@ if __name__ == "__main__":
     print()
     msg = input("Type your secret message:")
     while(1):
-        run_encryption(msg, my_l, seed)
+        result = run_encryption(msg, my_l, seed)
+        if file_loc is not None:
+            with open(file_loc, 'w+') as f:
+                f.write(result)
+            print("Saved generated sentence to "+file_loc)
         stop = input("\nPress enter to regenerate or type anything to exit:")
         if len(stop) > 0:
             break

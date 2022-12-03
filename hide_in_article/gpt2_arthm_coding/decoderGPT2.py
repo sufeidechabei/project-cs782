@@ -9,7 +9,18 @@ from termcolor import colored
 import math as math
 import random as rng
 
+
+import signal
+
+def ctrlC_handler(signum, frame):
+    GPT2ArthmDecoder.abort = True
+
+
+
+
 class GPT2ArthmDecoder:
+
+    abort = False
 
     def __init__(self, l=4, r=8, code=None, seed="I think", toker=None, model=None):
         self.r = r
@@ -26,6 +37,8 @@ class GPT2ArthmDecoder:
         if code is None:
             exit(1)
         self.c = int.from_bytes(code[:self.l], byteorder='big', signed=False)
+        # SINGAL stuffs
+        signal.signal(signal.SIGINT, ctrlC_handler)
 
 
     def target_frequency(self):
@@ -53,7 +66,7 @@ class GPT2ArthmDecoder:
         D = []
         T = []
         print(self.seed[1:],end="",flush=True)
-        while (True):
+        while (not GPT2ArthmDecoder.abort):
             assert self.c < self.b # for future checks
             tfreq = self.target_frequency()
             token = self.M.GetToken(tfreq)
@@ -101,6 +114,7 @@ class GPT2ArthmDecoder:
             if len(D) >= len(self.C) and (token[0] == '.' or token[0] == '?' or token[0] == '!'):
                 print()
                 break
+        GPT2ArthmDecoder.abort = False
         return T
                     
 def bin32(x):

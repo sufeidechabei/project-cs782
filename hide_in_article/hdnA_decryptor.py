@@ -60,7 +60,7 @@ def run_decryption(eng, my_l, given_iv=None):
                 extracted_header_bytes = en_gpt2.GPT2ArthmEncoder.encode_partial(my_l, remaining_tokens, seed_candidate, toker, model)
              except:
                  print("] ",end="")
-                 print(colored("header cannot be extracted","red"))
+                 print(colored(" Cannot be extracted","red"))
                  seed_candidate_tokens = []
                  continue
              chunk_num = crypto.check_header(bytes(extracted_header_bytes), seed_candidate)
@@ -72,7 +72,7 @@ def run_decryption(eng, my_l, given_iv=None):
     en = en_gpt2.GPT2ArthmEncoder(l=my_l, seed=seed_candidate, toker=toker, model=model)
     t5 = time.perf_counter()
     print(f"\nIntialization and searching took {t5 - t4:0.4f} s")
-    print("\n\n____________________ Step 2: decrypt the secret  __________________")
+    print("\n\n____________________  Step 2: decrypt the secret  __________________")
     D, _ = en.encode(remaining_tokens, 32 + chunk_num * 16)
     D_ct = D[32:]
     t6 = time.perf_counter()
@@ -98,22 +98,25 @@ def run_decryption(eng, my_l, given_iv=None):
 if __name__ == "__main__":
     arglist = sys.argv[1:]
     if len(arglist) == 0:
-        print("To be more specified, run ./e2e_decryptor.py -l [coding range (32 as default)]")
+        print("To be more specified, run ./hdnA_decryptor.py -l [coding range (32 as default)] -f [file to replace manual input]")
     print()
-    options="l:s:a"
+    options="f:l:s:a"
     long_options=["range","seed","iv"]
     arguments, values = getopt.getopt(arglist, options, long_options)
-    add_iv = False
     my_l = 32
+    file_loc = None
     for curarg, curval in arguments:
         if curarg == "-l":
             my_l = int(curval)
-        if curarg == "-s":
-            seed = curval
-        if curarg == "-a":
-            add_iv = True
+        if curarg == "-f":
+            file_loc = curval
     print("coding range = "+str(my_l))
     print()
-    msg = input("Type the english sentence found:")
+    msg = ""
+    if file_loc is None:
+        msg = input("Enter the passage you found:")
+    else:
+        with open(file_loc, "r") as f:
+            msg = f.read()
     run_decryption(msg, my_l)
         
