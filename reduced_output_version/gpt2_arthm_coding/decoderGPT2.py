@@ -52,12 +52,19 @@ class GPT2ArthmDecoder:
         """ Follow their written version and pseudo-code in blend """
         D = []
         T = []
+        space = 0
+        if (len(self.C.hex()) % 2 == 1):
+            print("0",end="",flush=True)
+        print(colored(self.C.hex(),"yellow"),flush=True)
         while (True):
             assert self.c < self.b # for future checks
             tfreq = self.target_frequency()
             token = self.M.GetToken(tfreq)
             T.append(token)
             self.adjust(token)
+            for ii in range(0, space):
+                print(' ', end="", flush=True)
+            print(colored(hex(self.c)[2:].zfill(64),"cyan"), flush=True)
             shift_amount = self.r*self.l - 1
             dbf_a = self.a >>  shift_amount
             dbf_b = self.b-1 >> shift_amount
@@ -79,12 +86,13 @@ class GPT2ArthmDecoder:
                 # process c
                 if self.c is not None:
                     self.c = (self.c << self.r) % bb
+                    space += 2
                     if self.C_cursor < len(self.C):
                         next_byte = self.C[self.C_cursor]
                         self.C_cursor = self.C_cursor + 1
                         self.c = self.c + next_byte
                     else:
-                        self.c = self.c + rng.randint(0,255)
+                        self.c = self.c + 1# rng.randint(0,255)
                 if self.a > self.b:
                     self.w.append(symbol)
                     self.invert_range()

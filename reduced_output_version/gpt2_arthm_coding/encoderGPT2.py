@@ -56,6 +56,7 @@ class GPT2ArthmEncoder:
                 else:
                     D.append(symbol)
             self.M.next(token)
+            print(bytes(D).hex())
         return D, self.w
                     
 def bin32(x):
